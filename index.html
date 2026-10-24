@@ -1,131 +1,204 @@
-<!doctype html>
-<html lang="es-CL">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}/* Dashboard Frisancho */
+.frcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-bottom:16px}
+.frc{display:block;border:1px solid var(--line);border-radius:10px;padding:12px 14px 8px;background:var(--bg);cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%;min-width:0}
+.frc:hover{border-color:var(--accent)}
+.frc[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.frc-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:14px}
+.frc-h .k{font:600 .68rem var(--f-mono);letter-spacing:.08em;color:var(--muted);width:100%}
+.frc-h b{font:700 1.45rem/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.frc-h b small{font:500 .75rem var(--f-body);color:var(--muted);margin-left:2px}
+.frsc{position:relative}
+.frbar{position:relative;height:12px;border-radius:6px;overflow:hidden;background:var(--line)}
+.frbar span{position:absolute;top:0;bottom:0;opacity:.8}
+.frbar em{position:absolute;top:0;bottom:0;width:1px;background:var(--surface);opacity:.9}
+.frm{position:absolute;top:-6px;width:4px;height:24px;background:var(--ink);border:1px solid var(--surface);border-radius:2px;transform:translateX(-50%);transition:left .35s ease}
+.frtk{position:relative;height:16px;font:500 .62rem var(--f-mono);color:var(--muted);margin-top:5px}
+.frtk span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.frempty{border:1px dashed var(--line);border-radius:10px;padding:14px;color:var(--muted);font-size:.85rem;grid-column:1/-1}
+.frfull-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin:20px 0 8px}
+.frfull-h h3{font:700 1.05rem var(--f-display);margin:0}
+.frfull-h .seg button{padding:6px 12px}
+.frch{width:100%;height:auto;display:block;margin:4px 0 10px}
+.frch .b1{fill:var(--accent);opacity:.12}.frch .b2{fill:var(--accent);opacity:.22}
+.frch .p50{stroke:var(--accent);stroke-width:2.5;fill:none;stroke-linejoin:round}
+.frch .pe{stroke:var(--muted);stroke-width:1.2;stroke-dasharray:4 3;fill:none}
+.frch .gl{stroke:var(--line);stroke-width:1}
+.frch .tx{fill:var(--muted);font:500 10px var(--f-mono)}
+.frch .tx.b{fill:var(--ink);font-weight:700}
+.frch .col{fill:var(--accent-soft)}
+.frch .dot{fill:var(--ink);stroke:var(--surface);stroke-width:2}
+table.frtbl th,table.frtbl td{padding:6px 8px;text-align:right;font-family:var(--f-mono);font-size:.8rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+table.frtbl th:first-child,table.frtbl td:first-child{text-align:left}
+table.frtbl tr.me td{background:var(--accent-soft);font-weight:600}
+table.frtbl td.hit{box-shadow:inset 0 0 0 2px var(--accent);color:var(--accent)}
+table.frtbl td.z5{color:var(--bad)}
+details.bio{grid-column:1/-1;border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin:0 0 16px}
+details.bio>summary{cursor:pointer;font:600 .72rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+details.bio fieldset{margin-top:12px}
+.rcvbox{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;border-radius:8px;padding:12px 14px;margin-bottom:12px;background:var(--bg);border:1px solid var(--line)}
+.rcvbox b{font:700 1.15rem var(--f-display)}
+.rcvbox ul{margin:0;padding-left:18px;font-size:.85rem;width:100%}
+.xlist{display:flex;flex-direction:column;gap:6px}
+.xrow{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,.8fr) 40px;gap:6px;align-items:center}
+.xrow input{padding:6px 8px}
+.xrow button{height:40px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--bad);font:700 1.1rem var(--f-body);cursor:pointer}
+.xadd{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,.8fr) auto;gap:6px}
+@media (max-width:420px){.xadd{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.xadd #xName{grid-column:1/-1}}
+.vhide{display:none!important}
+.gsync{flex-direction:row;align-items:center;gap:8px;font-size:.82rem;color:var(--ink)}
+.gsync input{width:20px;height:20px;min-height:0;flex:none;accent-color:var(--accent)}
+table.goals input[readonly]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+@media (max-width:600px){
+  table.stack thead{display:none}
+  table.stack tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 10px;padding:10px 0;border-bottom:1px solid var(--line)}
+  table.stack td{border:0;padding:2px 0;text-align:left!important;white-space:normal}
+  table.stack td:first-child{grid-column:1/-1;font-weight:600}
+  table.stack td[data-l]:not(:first-child)::before{content:attr(data-l);display:block;font:600 .6rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+  table.stack td:last-child{grid-column:span 3}
+  table.goals.stack td:last-child{grid-column:auto}
+  table.stack input{width:100%}
+}
+#getBody tr[data-eq],#macroBody tr,#view-eval .kpi{cursor:pointer}
+#getBody tr[data-eq]:hover td,#macroBody tr:hover td{background:var(--accent-soft)}
+.vsecs{display:flex;flex-direction:column;gap:2px;margin:6px 0 4px}
+.vsecs label{flex-direction:row;align-items:center;gap:10px;font-size:.9rem;color:var(--ink);padding:8px 0;border-bottom:1px solid var(--line)}
+.vsecs input{width:22px;height:22px;min-height:0;flex:none;accent-color:var(--accent)}
+.rcvcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:4px 0 12px}
+.rcvc{border:1px solid var(--line);border-radius:10px;padding:12px 14px 10px;background:var(--bg);min-width:0}
+.rcvc .k{font:600 .68rem var(--f-mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase;display:block}
+.rcvc .v{font:700 2rem/1.1 var(--f-display);font-variant-numeric:tabular-nums;margin:4px 0 2px;display:block}
+.rcvc .v small{font:500 .8rem var(--f-body);color:var(--muted)}
+.rcvc .sub{font-size:.78rem;color:var(--muted);display:block;margin-top:6px}
+.rcvbar{position:relative;height:12px;border-radius:6px;overflow:hidden;display:flex;margin:12px 0 4px}
+.rcvbar span{height:100%;opacity:.8}
+.rcvsc{position:relative}
+.rcvsc i{position:absolute;top:-6px;width:4px;height:24px;background:var(--ink);border:1px solid var(--surface);border-radius:2px;transform:translateX(-50%);transition:left .35s ease}
+.rcvsc i.opt{background:var(--ok);height:18px;top:-3px;width:3px}
+.rcvtk{position:relative;height:14px;font:500 .62rem var(--f-mono);color:var(--muted)}
+.rcvtk span{position:absolute;transform:translateX(-50%)}
+table.rcvmod td{font-size:.84rem}
+@media (prefers-reduced-motion:reduce){.frm{transition:none}}
+
+/* ---------- Ficha rápida móvil ---------- */
+html{font-size:var(--fs,100%)}
+body{font-size:.9375rem}
+.qstrip{position:sticky;top:env(safe-area-inset-top,0px);z-index:25;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.08);padding:8px 8px 6px}
+.qtop{display:flex;align-items:center;gap:8px;min-width:0}
+.qwho{flex:none;max-width:34%;min-width:0;padding:2px 4px;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer;font:inherit}
+.qwho b{display:block;font:700 .9rem/1.15 var(--f-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qwho small{display:block;font-size:.72rem;color:var(--muted);white-space:nowrap}
+.qchips{flex:1;min-width:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;padding:2px 0}
+.qchips::-webkit-scrollbar{display:none}
+.qc{flex:none;scroll-snap-align:start;display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-width:64px;padding:5px 10px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;cursor:pointer;text-align:left}
+.qc span{font:600 .62rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.qc b{font:700 .98rem/1.1 var(--f-display);font-variant-numeric:tabular-nums;white-space:nowrap}
+.qc i{font-style:normal;font-size:.68rem;color:var(--muted);white-space:nowrap}
+.qc.vct{background:var(--accent);border-color:var(--accent)}
+.qc.vct span,.qc.vct i{color:var(--surface);opacity:.85}.qc.vct b{color:var(--surface)}
+.qc.warn{border-color:var(--warn)}
+.qc:active{transform:scale(.97)}
+.qicon{flex:none;width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--ink);cursor:pointer}
+.qicon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.qicon[aria-expanded="true"] svg{transform:rotate(180deg)}
+.qmac{display:flex;height:4px;border-radius:2px;overflow:hidden;margin:6px 2px 0}
+.qmac i{display:block;height:100%}
+.qmore{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px;margin-top:8px;max-height:46vh;overflow:auto}
+.qm{border:1px solid var(--line);border-radius:8px;padding:6px 9px;background:var(--bg);min-width:0;font:inherit;color:var(--ink);text-align:left;cursor:pointer}
+.qm span{display:block;font:600 .6rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.qm b{display:block;font-weight:600;font-size:.88rem;overflow-wrap:anywhere}
+.qm.note{grid-column:1/-1;cursor:pointer}
+.qm.note b{font-weight:400;white-space:pre-wrap}
+aside.panel{top:calc(var(--qh,0px) + env(safe-area-inset-top,0px) + 12px)}
+/* Hojas deslizables */
+.sheet-bg{position:fixed;inset:0;background:rgba(10,20,18,.42);z-index:60}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:61;margin:0 auto;max-width:720px;max-height:90vh;display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border-radius:18px 18px 0 0;box-shadow:0 -10px 34px rgba(0,0,0,.22);padding:6px 16px calc(14px + env(safe-area-inset-bottom,0px));transition:transform .22s ease}
+@media (min-width:761px){.sheet{bottom:auto;top:50%;transform:translateY(-50%);border-radius:16px;max-height:86vh}.sheet.drag{transition:none}}
+.sheet.drag{transition:none}
+.sheet-grip{touch-action:none;padding:6px 0 4px;cursor:grab}
+.sheet-grip i{display:block;width:44px;height:5px;border-radius:3px;background:var(--line);margin:0 auto}
+.sheet-h{display:flex;align-items:center;justify-content:space-between;gap:10px;touch-action:none;padding-bottom:8px}
+.sheet-h h3{font:700 1.15rem var(--f-display);margin:0}
+.sheet-body{overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:6px}
+.qlive{position:sticky;top:0;z-index:2;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;background:var(--accent-soft);border-radius:10px;padding:10px 12px;margin-bottom:12px}
+.qlive .big{grid-row:span 2;font:700 1.9rem/1 var(--f-display);font-variant-numeric:tabular-nums;color:var(--accent)}
+.qlive .big small{display:block;font:600 .62rem var(--f-mono);letter-spacing:.08em;color:var(--muted);margin-top:4px}
+.qlive div{font-size:.82rem}
+.qsec{font:600 .68rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:14px 0 8px}
+.qgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px}
+@media (max-width:340px){.qgrid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:420px){.stp button{width:40px}}
+.qf{display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:var(--muted);min-width:0}
+.qf.full{grid-column:1/-1}
+.stp{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--bg)}
+.stp button{flex:none;width:46px;border:0;background:var(--surface);color:var(--ink);font:700 1.25rem var(--f-body);cursor:pointer;touch-action:manipulation}
+.stp button:active{background:var(--accent-soft)}
+.stp input{border:0;border-radius:0;text-align:center;flex:1;min-width:0;background:transparent}
+.fab{position:fixed;right:16px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 16px;background:var(--ink);color:var(--surface);font:600 .9rem var(--f-body);box-shadow:0 8px 22px rgba(0,0,0,.25);cursor:pointer}
+.fab svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fab .bdg{min-width:20px;height:20px;border-radius:10px;background:var(--mint,#5fe0c4);color:#0c3a33;font:700 .72rem/20px var(--f-mono);text-align:center;padding:0 5px}
+@media (max-width:760px){
+  .fab{bottom:calc(92px + env(safe-area-inset-bottom,0px));padding:0;width:54px;height:54px;justify-content:center;font-size:0;gap:0}
+  .fab svg{width:22px;height:22px}
+  .fab .bdg{position:absolute;top:-4px;right:-4px;font-size:.72rem}
+  body{padding-bottom:calc(150px + env(safe-area-inset-bottom,0px))}
+  .appbar{padding:14px;gap:10px}
+  .appbar .sub,.appbar .tag{display:none}
+  .appbar h1{font-size:1.3rem}
+  .qtop{flex-wrap:wrap;row-gap:6px}
+  .qwho{flex:1;max-width:none;order:1}
+  .qicon{order:2;width:36px;height:36px}
+  .qchips{order:3;flex-basis:100%}
+}
+.ntags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.ntags button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:6px 12px;font:500 .8rem var(--f-body);cursor:pointer}
+.ntags button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.nlist{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.nitem{border-left:3px solid var(--accent);background:var(--bg);border-radius:0 8px 8px 0;padding:7px 10px;font-size:.86rem;white-space:pre-wrap;overflow-wrap:anywhere}
+.nitem small{display:block;font:600 .66rem var(--f-mono);color:var(--muted);margin-bottom:2px}
+.vrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.vrow input[type=range]{flex:1;max-width:260px;accent-color:var(--accent)}
+.cview{overflow:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:10px;background:var(--surface);touch-action:pan-x pan-y pinch-zoom}
+.cview svg{display:block;height:auto}
+svg.wchart,svg.frch{cursor:zoom-in}
+/* Paneles plegables */
+.panel>h2.colh{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;user-select:none;-webkit-tap-highlight-color:transparent}
+.panel>h2.colh::after{content:"";flex:none;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-right:4px;transition:transform .2s}
+.panel.collapsed>h2.colh{margin-bottom:0}
+.panel.collapsed>h2.colh::after{transform:rotate(-45deg)}
+.panel.collapsed>:not(h2){display:none!important}
+.compact .panel{padding:12px}
+.compact fieldset{gap:6px 8px;margin-bottom:10px}
+.compact .kpi{padding:10px 12px}
+.compact .kpi .v{font-size:1.4rem}
+.compact main,.compact .wrap{gap:12px}
+/* Táctil */
+@media (pointer:coarse){
+  input,select,textarea{font-size:16px}
+  input,select{min-height:44px}
+  .btn{min-height:44px}
+  .seg button{min-height:42px}
+  .iconbtn{min-height:34px;min-width:34px}
+}
+@media (max-width:520px){
+  .panel{padding:14px}
+  .kpi .v{font-size:1.45rem}
+  .rcvc .v{font-size:1.7rem}
+}
+@media (prefers-reduced-motion:reduce){.sheet,.qicon svg{transition:none}}
+</style></head><body>
 <title>Calculadora Nutricional Clínica</title>
-<meta name="description" content="Fichas de pacientes, requerimientos, plan de alimentación con tabla INTA 2018 y fórmulas predictivas.">
+<link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0c3a33">
-<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="CalcNutri">
-<meta name="format-detection" content="telephone=no">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<style>
-:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#0c3a33}
-img{max-width:100%}
-[hidden]{display:none!important}
-@font-face{font-family:"Bricolage Grotesque";font-weight:600;font-display:swap;src:url(fonts/bricolage-grotesque-latin-600-normal.woff2) format("woff2")}
-@font-face{font-family:"Bricolage Grotesque";font-weight:700;font-display:swap;src:url(fonts/bricolage-grotesque-latin-700-normal.woff2) format("woff2")}
-@font-face{font-family:"Public Sans";font-weight:400;font-display:swap;src:url(fonts/public-sans-latin-400-normal.woff2) format("woff2")}
-@font-face{font-family:"Public Sans";font-weight:500;font-display:swap;src:url(fonts/public-sans-latin-500-normal.woff2) format("woff2")}
-@font-face{font-family:"Public Sans";font-weight:600;font-display:swap;src:url(fonts/public-sans-latin-600-normal.woff2) format("woff2")}
-@font-face{font-family:"JetBrains Mono";font-weight:400;font-display:swap;src:url(fonts/jetbrains-mono-latin-400-normal.woff2) format("woff2")}
-@font-face{font-family:"JetBrains Mono";font-weight:600;font-display:swap;src:url(fonts/jetbrains-mono-latin-600-normal.woff2) format("woff2")}
-</style>
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<script src="local-store.js"></script>
+<link rel="stylesheet" href="fonts/fonts.css">
 <script src="vendor/jspdf.umd.min.js"></script>
 <script src="vendor/jspdf.plugin.autotable.min.js"></script>
-<script>
-/* Almacenamiento local del teléfono (IndexedDB) con la misma interfaz que usaba la versión de Claude.
-   Los datos nunca salen del equipo salvo que el usuario exporte un respaldo. */
-(function(){
-  const DBN='calcnutri', ST='docs';
-  let idb=null, cache=new Map(), ready=null;
-  const subs=new Set();
-  const clone=o=>JSON.parse(JSON.stringify(o));
-  function open(){
-    return new Promise((res,rej)=>{
-      const r=indexedDB.open(DBN,1);
-      r.onupgradeneeded=()=>{ r.result.createObjectStore(ST); };
-      r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error);
-    });
-  }
-  function tx(mode,fn){
-    return new Promise((res,rej)=>{
-      const t=idb.transaction(ST,mode), s=t.objectStore(ST); fn(s);
-      t.oncomplete=()=>res(); t.onerror=()=>rej({code:'unavailable',message:String(t.error)}); t.onabort=()=>rej({code:t.error&&t.error.name==='QuotaExceededError'?'quota_exceeded':'unavailable',message:String(t.error)});
-    });
-  }
-  function load(){
-    return new Promise((res,rej)=>{
-      const t=idb.transaction(ST,'readonly'), s=t.objectStore(ST), m=new Map();
-      const c=s.openCursor();
-      c.onsuccess=()=>{ const cur=c.result; if(cur){ m.set(cur.key,cur.value); cur.continue(); } else { cache=m; res(); } };
-      c.onerror=()=>rej(c.error);
-    });
-  }
-  function emit(){
-    const docs=[...cache.entries()].map(([id,d])=>{ const f=Object.freeze(clone(d)); return {id,exists:true,data:()=>f,metadata:{fromCache:false,hasPendingWrites:false}}; });
-    const snap={docs,size:docs.length,empty:!docs.length,docChanges:()=>[],metadata:{fromCache:false,hasPendingWrites:false}};
-    subs.forEach(f=>{ try{ f(snap); }catch(e){ console.error(e); } });
-  }
-  function init(){
-    if(!ready) ready=open().then(d=>{ idb=d; return load(); }).then(()=>{
-      try{ navigator.storage && navigator.storage.persist && navigator.storage.persist(); }catch(e){}
-    });
-    return ready;
-  }
-  function docRef(id){
-    return {
-      id, path:id,
-      async get(){ await init(); const d=cache.get(id); return {id,exists:!!d,data:()=>d?clone(d):undefined,metadata:{fromCache:false,hasPendingWrites:false}}; },
-      async set(data){ await init(); const v=clone(data); await tx('readwrite',s=>s.put(v,id)); cache.set(id,v); emit(); },
-      async update(data){ await init(); const old=cache.get(id); if(!old) throw {code:'invalid_argument',message:'El documento no existe'}; const v=Object.assign(clone(old),clone(data)); await tx('readwrite',s=>s.put(v,id)); cache.set(id,v); emit(); },
-      async delete(){ await init(); await tx('readwrite',s=>s.delete(id)); cache.delete(id); emit(); }
-    };
-  }
-  const collection={
-    doc:id=>docRef(id||('d_'+Date.now().toString(36)+Math.random().toString(36).slice(2,8))),
-    async add(d){ const r=docRef('d_'+Date.now().toString(36)+Math.random().toString(36).slice(2,8)); await r.set(d); return r; },
-    onSnapshot(next,err){ subs.add(next); init().then(emit).catch(e=>{ subs.delete(next); err&&err({code:'unavailable',message:String(e)}); }); return ()=>subs.delete(next); },
-    async get(){ await init(); return {docs:[...cache.entries()].map(([id,d])=>({id,exists:true,data:()=>clone(d)})),size:cache.size,empty:!cache.size}; }
-  };
-  const db={collection:()=>collection,doc:p=>docRef(String(p).split('/').pop())};
-  const user={id:async()=>'local',isOwner:()=>true,canEdit:()=>true,can:()=>true};
-
-  // Guardar archivos: en el teléfono abre el menú Compartir (Archivos, Drive, WhatsApp…); si no, descarga.
-  async function saveFile(name,data,type){
-    const blob=data instanceof Blob?data:new Blob([data],{type:type||'application/octet-stream'});
-    try{
-      const file=new File([blob],name,{type:blob.type});
-      if(navigator.canShare && navigator.canShare({files:[file]}) && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){
-        await navigator.share({files:[file],title:name});
-        return;
-      }
-    }catch(e){ if(e && e.name==='AbortError') throw {code:'declined'}; }
-    const url=URL.createObjectURL(blob), a=document.createElement('a');
-    a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),4000);
-  }
-  const downloads={save:async({filename,data})=>{ const t=/\.pdf$/i.test(filename)?'application/pdf':/\.json$/i.test(filename)?'application/json':'application/octet-stream'; return saveFile(filename,data,t); }};
-
-  window.claude={use:async n=>{
-    if(n==='db'){ try{ await init(); return db; }catch(e){ return null; } }
-    if(n==='user') return user;
-    if(n==='downloads') return downloads;
-    return null;
-  }};
-  window.LOCALDB={
-    init,
-    async exportAll(){ await init(); const o={}; cache.forEach((v,k)=>o[k]=v); return o; },
-    async importAll(docs){
-      await init();
-      const ids=Object.keys(docs).filter(k=>docs[k]&&typeof docs[k]==='object');
-      await tx('readwrite',s=>ids.forEach(k=>s.put(clone(docs[k]),k)));
-      ids.forEach(k=>cache.set(k,clone(docs[k]))); emit(); return ids.length;
-    },
-    saveFile
-  };
-})();
-</script>
-</head>
-<body>
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <style>
 /* Layout: ficha de dos columnas — datos del paciente (izq., fija) · resultados (der.) */
 :root{
@@ -383,30 +456,6 @@ fieldset.patchk{display:block;margin:0}
 #view-pred main{display:flex;flex-direction:column;gap:20px;min-width:0}
 #view-pred input[type=radio]{width:auto;accent-color:var(--accent)}
 tr.na td{color:var(--muted)}
-
-/* ---------- Versión app para teléfono ---------- */
-.installbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:10px;padding:10px 12px;font-size:.85rem}
-.installbar p{margin:0;min-width:0;flex:1 1 220px}
-.installbar .btnrow{margin:0}
-.datameter{font:600 .72rem var(--f-mono);color:var(--muted)}
-.appver{font:600 .68rem var(--f-mono);color:var(--muted);letter-spacing:.06em}
-@media (max-width:760px){
-  input,select,textarea{font-size:16px!important}
-  .appbar{padding:14px}
-  .appbar .tag,.appbar .sub{display:none}
-  .appbar h1{font-size:1.3rem}
-  body{padding-block-start:12px}
-  .btn{padding:10px 14px}
-  .iconbtn{padding:6px 9px}
-  .pbar{padding:8px 10px}
-  .pav{width:34px;height:34px}
-  .pact{width:100%}
-  .pact .btn{flex:1 1 0;padding:8px 10px}
-  .save-st{width:100%}
-}
-@media (display-mode: standalone){
-  body{overscroll-behavior-y:none}
-}
 </style>
 
 <div class="wrap">
@@ -415,7 +464,7 @@ tr.na td{color:var(--muted)}
       <div>
         <div class="tag">Adulto y adulto mayor · ≥18 años</div>
         <h1>Calculadora Nutricional Clínica</h1>
-        <p class="sub">Fichas de pacientes, requerimientos, pautas y PDF. Funciona sin internet; los datos quedan en este teléfono.</p>
+        <p class="sub">Fichas de pacientes, requerimientos, pautas y PDF. Referencias OMS, MINSAL, FAO/OMS/UNU e INTA 2018.</p>
       </div>
     </div>
     <div class="pbar" id="pbar">
@@ -425,20 +474,14 @@ tr.na td{color:var(--muted)}
       </div>
       <div class="pact">
         <span class="save-st" id="saveSt" role="status" aria-live="polite"></span>
+        <button class="btn" type="button" id="vBtn" aria-label="Ajustes de vista">Vista</button>
         <button class="btn" type="button" id="pbClose" hidden>Cerrar paciente</button>
         <button class="btn accent" type="button" id="pbSaveVisit" hidden>Guardar control</button>
       </div>
     </div>
   </header>
-  <div class="warnbox" id="syncWarn" hidden>No se pudo abrir el almacenamiento del teléfono. Puedes calcular, pero los pacientes no se guardarán. Revisa que el navegador no esté en modo privado.</div>
-  <div class="installbar" id="installBar" hidden>
-    <p id="installTxt">Instala la calculadora en tu teléfono para abrirla desde la pantalla de inicio y usarla sin internet.</p>
-    <div class="btnrow"><button class="btn primary" type="button" id="installBtn">Instalar</button><button class="btn" type="button" id="installNo">Ahora no</button></div>
-  </div>
-  <div class="installbar" id="updateBar" hidden>
-    <p>Hay una versión nueva de la calculadora.</p>
-    <div class="btnrow"><button class="btn primary" type="button" id="updateBtn">Actualizar ahora</button></div>
-  </div>
+  <div class="warnbox" id="bkWarn" hidden></div>
+  <div class="warnbox" id="syncWarn" hidden>No hay conexión con el almacenamiento de datos. Puedes calcular, pero los pacientes no se guardarán. Este navegador no permite guardar datos locales (revisa que no esté en modo privado).</div>
 
   <nav class="tabs" role="tablist" aria-label="Secciones">
     <button type="button" role="tab" id="tab-pac" aria-controls="view-pac" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M21 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Pacientes</button>
@@ -448,6 +491,17 @@ tr.na td{color:var(--muted)}
     <button type="button" role="tab" id="tab-tpl" aria-controls="view-tpl" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>Mis pautas</button>
   </nav>
 
+  <div class="qstrip" id="qstrip" hidden>
+    <div class="qtop">
+      <button type="button" class="qwho" id="qWho" aria-label="Editar datos del paciente"><b id="qName">–</b><small id="qMeta">–</small></button>
+      <div class="qchips" id="qChips" role="list"></div>
+      <button type="button" class="qicon" id="qMoreBtn" aria-expanded="false" aria-controls="qMore" aria-label="Ver todos los datos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+    </div>
+    <div class="qmac" id="qMac"></div>
+    <div class="qmore" id="qMore" hidden></div>
+  </div>
+
+  <div class="warnbox" id="scratchBar" hidden style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px"><span><b>Sin ficha abierta.</b> Puedes calcular y modificar todo, pero no se guarda hasta crear la ficha.</span><button class="btn primary" type="button" id="scratchSave">Crear ficha con estos datos</button><button class="btn" type="button" id="scratchOpen">Abrir paciente</button></div>
   <section class="panel" id="gate" hidden>
     <div class="empty"><b>Abre un paciente para continuar</b>La evaluación y el plan se trabajan sobre la ficha de un paciente. Créalo o elígelo en la pestaña Pacientes. Para un cálculo rápido sin ficha usa «Fórmulas predictivas».
       <div class="btnrow" style="justify-content:center"><button class="btn primary" type="button" id="gateNew">+ Nuevo paciente</button><button class="btn" type="button" id="gatePac">Ver pacientes</button></div>
@@ -502,16 +556,16 @@ tr.na td{color:var(--muted)}
           <label class="full" style="grid-column:1/-1">Contacto o centro<input type="text" id="profContact" maxlength="160" placeholder="Correo, teléfono o consulta"></label>
         </div>
       </details>
-      <details class="prof panel" id="backupBox" style="margin-top:12px;padding:12px;background:var(--bg)">
+      <details class="prof panel" id="bkBox" style="margin-top:12px;padding:12px;background:var(--bg)">
         <summary>Respaldo de datos</summary>
-        <p class="note" style="margin:0 0 10px">Los pacientes, controles y pautas se guardan solo en este teléfono. Exporta un respaldo con frecuencia: si borras la app o los datos del navegador, se pierden. El archivo contiene datos clínicos; guárdalo en un lugar protegido.</p>
-        <div class="btnrow" style="margin:0">
+        <p class="note">Los pacientes, controles y pautas se guardan solo en este teléfono. Exporta un respaldo con frecuencia y guárdalo fuera del teléfono (correo o Drive). Si borras los datos del navegador o desinstalas la app sin respaldo, se pierden.</p>
+        <p class="note" id="bkLast" style="font-weight:600"></p>
+        <div class="btnrow">
           <button class="btn primary" type="button" id="bkExport">Exportar respaldo</button>
           <button class="btn" type="button" id="bkImport">Importar respaldo</button>
           <input type="file" id="bkFile" accept="application/json,.json" hidden>
         </div>
-        <p class="datameter" id="bkMeter" style="margin:10px 0 0"></p>
-        <p class="appver" id="appVer" style="margin:6px 0 0"></p>
+        <label class="chk" style="margin-top:10px"><input type="checkbox" id="bkReplace"> Al importar, reemplazar todos los datos actuales (si no, se combinan)</label>
       </details>
     </section>
     <section class="panel pdetail" id="patDetail">
@@ -529,7 +583,7 @@ tr.na td{color:var(--muted)}
           <label>Teléfono o correo<input type="text" id="pdPhone" maxlength="80"></label>
           <label>Motivo de consulta<input type="text" id="pdDx" maxlength="160"></label>
           <label>Servicio o cama<input type="text" id="pdBed" maxlength="60"></label>
-          <label style="grid-column:1/-1">Notas clínicas<textarea id="pdNotes" rows="3" maxlength="2000" placeholder="Antecedentes, alergias, preferencias, metas acordadas"></textarea></label>
+          <label style="grid-column:1/-1">Notas clínicas<textarea id="pdNotes" rows="3" maxlength="8000" placeholder="Antecedentes, alergias, preferencias, metas acordadas"></textarea></label>
         </div>
         <div class="pdsec">
           <h2>Patologías crónicas</h2>
@@ -543,6 +597,17 @@ tr.na td{color:var(--muted)}
             <button type="button" data-ch="peso" aria-pressed="true">Peso</button>
             <button type="button" data-ch="imc" aria-pressed="false">IMC</button>
             <button type="button" data-ch="cin" aria-pressed="false">Cintura</button>
+          </div>
+          <div class="seg chartsel" role="group" aria-label="Indicador clínico del gráfico" style="margin-top:6px">
+            <button type="button" data-ch="pas" aria-pressed="false">PAS</button>
+            <button type="button" data-ch="pad" aria-pressed="false">PAD</button>
+            <button type="button" data-ch="glic" aria-pressed="false">Glicemia</button>
+            <button type="button" data-ch="hba1c" aria-pressed="false">HbA1c</button>
+          </div>
+          <div class="seg chartsel" role="group" aria-label="Exámenes del gráfico" style="margin-top:6px">
+            <button type="button" data-ch="ldl" aria-pressed="false">LDL</button>
+            <button type="button" data-ch="vfg" aria-pressed="false">VFG</button>
+            <button type="button" data-ch="alb" aria-pressed="false">Albúmina</button>
           </div>
           <div id="wChartBox"></div>
         </div>
@@ -577,6 +642,79 @@ tr.na td{color:var(--muted)}
         </fieldset>
 
         <fieldset>
+          <legend>Signos vitales y glicemia</legend>
+          <label>PA sistólica (mmHg)<input type="number" id="pas" min="50" max="260"></label>
+          <label>PA diastólica (mmHg)<input type="number" id="pad" min="30" max="160"></label>
+          <label>Frec. cardíaca (lpm)<input type="number" id="fc" min="30" max="220"></label>
+          <label>HbA1c (%)<input type="number" id="hba1c" step="0.1" min="4" max="18"></label>
+          <label>Glicemia (mg/dL)<input type="number" id="glic" min="20" max="800"></label>
+          <label>Momento de la glicemia
+            <select id="glicMom">
+              <option value="hosp">Hospitalizado · cualquier hora</option>
+              <option value="ayu">Ambulatorio · ayunas o preprandial</option>
+              <option value="post">Ambulatorio · postprandial 2 h</option>
+            </select>
+          </label>
+          <p class="note full" style="margin:0">Opcionales. Se guardan con cada control y se grafican en la ficha del paciente.</p>
+        </fieldset>
+
+        <details class="bio">
+          <summary>Exámenes bioquímicos</summary>
+          <fieldset>
+            <legend>Perfil lipídico (mg/dL)</legend>
+            <label>Colesterol total<input type="number" id="ct" step="1" min="50" max="600"></label>
+            <label>Colesterol HDL<input type="number" id="hdl" step="1" min="5" max="150"></label>
+            <label>Colesterol LDL<input type="number" id="ldl" step="1" min="10" max="500"></label>
+            <label>Triglicéridos<input type="number" id="tg" step="1" min="20" max="5000"></label>
+            <p class="note full" style="margin:0">Si no hay LDL medido, se calcula por Friedewald (solo con TG &lt;400).</p>
+          </fieldset>
+          <fieldset>
+            <legend>Función renal</legend>
+            <label>Creatinina (mg/dL)<input type="number" id="crea" step="0.01" min="0.1" max="20"></label>
+            <label>BUN (mg/dL)<input type="number" id="bun" step="1" min="1" max="250"></label>
+            <label class="full">Albuminuria RAC (mg/g)<input type="number" id="rac" step="1" min="0" max="10000"></label>
+          </fieldset>
+          <fieldset>
+            <legend>Estado nutricional e inflamación</legend>
+            <label>Albúmina (g/dL)<input type="number" id="alb" step="0.1" min="0.5" max="6"></label>
+            <label>Prealbúmina (mg/dL)<input type="number" id="preal" step="0.1" min="1" max="60"></label>
+            <label>PCR (mg/L)<input type="number" id="pcr" step="0.1" min="0" max="500"></label>
+            <label>Linfocitos totales (/mm³)<input type="number" id="linf" step="1" min="0" max="20000"></label>
+          </fieldset>
+          <fieldset>
+            <legend>Electrolitos</legend>
+            <label>Sodio (mEq/L)<input type="number" id="na" step="1" min="100" max="180"></label>
+            <label>Potasio (mEq/L)<input type="number" id="kk" step="0.1" min="1" max="9"></label>
+            <label>Fósforo (mg/dL)<input type="number" id="fos" step="0.1" min="0.5" max="15"></label>
+            <label>Magnesio (mg/dL)<input type="number" id="mg" step="0.1" min="0.3" max="6"></label>
+          </fieldset>
+        </details>
+
+        <fieldset>
+          <legend>Parámetros adicionales</legend>
+          <div class="full xlist" id="xList"></div>
+          <div class="full xadd">
+            <input type="text" id="xName" maxlength="60" placeholder="Parámetro (ej.: Hemoglobina)" list="xSug" aria-label="Nombre del parámetro">
+            <input type="text" id="xVal" maxlength="40" placeholder="Valor" aria-label="Valor">
+            <input type="text" id="xUnit" maxlength="20" placeholder="Unidad" list="xUnits" aria-label="Unidad">
+            <button class="btn" type="button" id="xAddBtn">Agregar</button>
+          </div>
+          <datalist id="xSug"><option value="Hemoglobina"><option value="Hematocrito"><option value="Ferritina"><option value="Vitamina D"><option value="Vitamina B12"><option value="Ácido fólico"><option value="TSH"><option value="Ácido úrico"><option value="Calcio"><option value="Zinc"><option value="Fuerza de prensión"><option value="Velocidad de marcha"><option value="Ingesta (% de lo servido)"><option value="Diuresis"><option value="Balance hídrico"><option value="Deposiciones"><option value="Residuo gástrico"><option value="NRS 2002"><option value="MNA-SF"><option value="VGS"><option value="GLIM"></datalist>
+          <datalist id="xUnits"><option value="g/dL"><option value="mg/dL"><option value="ng/mL"><option value="pg/mL"><option value="µUI/mL"><option value="%"><option value="kg"><option value="m/s"><option value="mL"><option value="mL/día"><option value="puntos"></datalist>
+          <input type="hidden" id="extra">
+          <p class="note full" style="margin:0">Agrega cualquier dato que no tenga campo propio. Se edita tocándolo, se quita con ×, y sale en el resumen y el PDF.</p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Riesgo cardiovascular</legend>
+          <label>ECV ateroesclerótica documentada<select id="ecv"><option value="">Sin dato</option><option value="no">No</option><option value="si">Sí</option></select></label>
+          <label>HTA refractaria<select id="htaR"><option value="">Sin dato</option><option value="no">No</option><option value="si">Sí</option></select></label>
+          <label>Tabaquismo actual<select id="tabaco"><option value="">Sin dato</option><option value="no">No</option><option value="si">Sí</option></select></label>
+          <label>Tratamiento antihipertensivo<select id="antiHTA"><option value="">Según patología HTA</option><option value="no">No</option><option value="si">Sí</option></select></label>
+          <p class="note full" style="margin:0">Diabetes se toma de las patologías de la ficha. Las ecuaciones usan edad, sexo, colesterol total, HDL, PA sistólica, tratamiento antihipertensivo, tabaquismo y diabetes.</p>
+        </fieldset>
+
+        <fieldset>
           <legend>Peso de referencia</legend>
           <label>IMC objetivo<input type="number" id="imcObj" step="0.5" min="18" max="30" value="22"></label>
           <label>Peso para cálculo
@@ -585,6 +723,7 @@ tr.na td{color:var(--muted)}
               <option value="actual">Actual</option>
               <option value="ideal">Ideal</option>
               <option value="ajustado">Ajustado</option>
+              <option value="maximo">Máximo aceptable</option>
             </select>
           </label>
         </fieldset>
@@ -619,15 +758,27 @@ tr.na td{color:var(--muted)}
         <fieldset>
           <legend>Prescripción</legend>
           <label>Proteína (g/kg)<input type="number" id="prot" step="0.1" min="0.4" max="3" value="1.0"></label>
-          <label>Lípidos (% VCT)<input type="number" id="lip" step="1" min="10" max="60" value="30"></label>
+          <label><span id="lipT">Lípidos (% VCT)</span><input type="number" id="lip" step="1" min="10" max="60" value="30"></label>
+          <label>Carbohidratos
+            <select id="choMode">
+              <option value="resto">Por diferencia (resto del VCT)</option>
+              <option value="pct">% del VCT</option>
+              <option value="gkg">g/kg de peso de cálculo</option>
+            </select>
+          </label>
+          <label id="choValL" hidden><span id="choValT">Carbohidratos (% VCT)</span><input type="number" id="choVal" step="0.5" min="0" max="80"></label>
           <label>Agua (ml/kg)<input type="number" id="agua" step="1" min="20" max="50" value="30"></label>
           <label>Ecuación del VCT
             <select id="eqSel">
               <option value="mifflin">Mifflin-St Jeor</option>
               <option value="hb">Harris-Benedict</option>
               <option value="fao">FAO/OMS/UNU</option>
+              <option value="kcalkg">kcal/kg × peso de cálculo</option>
+              <option value="manual">VCT indicado (manual)</option>
             </select>
           </label>
+          <label id="kcalkgL" hidden>kcal/kg indicadas<input type="number" id="kcalkg" step="0.5" min="10" max="50" value="25"></label>
+          <label id="vctManL" hidden>VCT indicado (kcal/día)<input type="number" id="vctMan" step="10" min="300" max="6000"></label>
         </fieldset>
       </form>
       <p class="note">Los cambios se guardan en la ficha del paciente abierto.</p>
@@ -655,12 +806,48 @@ tr.na td{color:var(--muted)}
           <table>
             <tbody>
               <tr><td>Peso ajustado <small>PI + 0,25 × (PA − PI)</small></td><td class="num" id="pAj">–</td></tr>
+              <tr><td>Peso máximo aceptable <small id="pMaxNote">IMC 25 × talla²</small></td><td class="num" id="pMaxAj">–</td></tr>
               <tr><td>% de peso ideal <small>PA / PI × 100</small></td><td class="num" id="pPct">–</td></tr>
               <tr><td>Rango de peso normal <small id="rangoNote">IMC 18,5–24,9</small></td><td class="num" id="pRango">–</td></tr>
               <tr><td>Perímetro de cintura <small id="cinNote">–</small></td><td class="num" id="cinVal">–</td></tr>
             </tbody>
           </table>
         </div>
+      </section>
+
+      <section class="panel" id="vitPanel">
+        <h2>Signos vitales y glicemia</h2>
+        <div id="vitAlerts"></div>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Parámetro</th><th class="num">Valor</th><th>Clasificación</th><th>Referencia</th></tr></thead>
+          <tbody id="vitBody"></tbody>
+        </table></div>
+        <p class="note">PA: clasificación de la Guía Clínica GES Hipertensión Arterial (MINSAL 2010, basada en ESH/ESC); meta general en hipertenso &lt;140/90 mmHg, individualizar en DM o ERC. Glicemia: ADA Standards of Care 2024 (meta en hospitalizado 140–180 mg/dL; ambulatorio 80–130 en ayunas y &lt;180 postprandial; hipoglicemia nivel 1 &lt;70 y nivel 2 &lt;54 mg/dL). HbA1c: meta general &lt;7 %, menos estricta (&lt;8 %) en adultos mayores frágiles o con hipoglicemias.</p>
+      </section>
+
+      <section class="panel" id="rcvPanel">
+        <h2>Riesgo cardiovascular</h2>
+        <div id="rcvBox"></div>
+        <p class="note">Criterios de alto riesgo directo (sin usar tabla) según el enfoque de riesgo MINSAL 2014: ECV ateroesclerótica documentada, diabetes mellitus, ERC etapa 3b–5 (VFG &lt;45) o albuminuria ≥30 mg/g, HTA refractaria y dislipidemia severa (LDL &gt;190 mg/dL). Si hay criterio directo, la clasificación es alto riesgo aunque las ecuaciones den un valor menor.</p>
+        <p class="note">Ecuaciones (riesgo a 10 años, personas sin ECV previa): <b>Pooled Cohort Equations</b> (Goff, ACC/AHA 2013; categorías de la guía ACC/AHA 2019: &lt;5 % bajo, 5–7,4 % limítrofe, 7,5–19,9 % intermedio, ≥20 % alto; 40–79 años; ecuación para población blanca u otra) y <b>Framingham general 2008</b> (D'Agostino, Circulation 2008; enfermedad CV global; &lt;10 % bajo, 10–20 % intermedio, &gt;20 % alto; 30–74 años). «Factores óptimos» = mismo sexo y edad con CT 170, HDL 50, PAS 110 sin tratamiento, sin tabaco ni diabetes. Ambas ecuaciones derivan de cohortes de EE.UU. y sobrestiman el riesgo en población chilena; la tabla chilena del PSCV (Framingham adaptada, Icaza 2009) no está incluida porque sus valores no están disponibles en texto verificable.</p>
+      </section>
+
+      <section class="panel" id="bioPanel">
+        <h2>Exámenes bioquímicos</h2>
+        <div id="bioAlerts"></div>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Examen</th><th class="num">Valor</th><th>Interpretación</th><th>Referencia</th></tr></thead>
+          <tbody id="bioBody"></tbody>
+        </table></div>
+        <p class="note">Lípidos: NCEP ATP III. VFG: CKD-EPI 2021 sin variable de raza, etapas y albuminuria KDIGO 2012/2024. Albúmina, prealbúmina y linfocitos: puntos de corte clásicos de depleción proteica (Blackburn); con inflamación (PCR elevada) no reflejan el estado nutricional (consenso ASPEN/AND 2012). Electrolitos: rangos de referencia habituales; usa los del laboratorio de tu centro. Hipofosfemia, hipokalemia o hipomagnesemia: riesgo de síndrome de realimentación (ASPEN 2020).</p>
+      </section>
+
+      <section class="panel" id="xPanel" hidden>
+        <h2>Parámetros adicionales</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Parámetro</th><th class="num">Valor</th><th>Unidad</th></tr></thead>
+          <tbody id="xBody"></tbody>
+        </table></div>
       </section>
 
       <section class="panel">
@@ -684,7 +871,7 @@ tr.na td{color:var(--muted)}
               <tbody id="macroBody"></tbody>
             </table>
           </div>
-          <p class="note">Proteína en g/kg sobre el peso de cálculo; lípidos en % fijo; carbohidratos por diferencia.</p>
+          <p class="note" id="macroNote">Proteína en g/kg sobre el peso de cálculo; lípidos en % fijo; carbohidratos por diferencia.</p>
         </section>
 
         <section class="panel">
@@ -716,8 +903,9 @@ tr.na td{color:var(--muted)}
       </div>
       <div class="ph-right">
         <h2>Distribución objetivo (% del VCT)</h2>
+        <label class="chk gsync" style="margin:0 0 8px"><input type="checkbox" id="goalSync" checked> Usar la prescripción de Evaluación (proteína, lípidos y carbohidratos)</label>
         <div class="tbl-wrap">
-          <table class="goals">
+          <table class="goals stack">
             <thead><tr><th>Macronutriente</th><th class="num">Rango mín.</th><th class="num">Rango máx.</th><th class="num">Meta</th><th class="num">Meta g</th><th class="num">g/kg</th></tr></thead>
             <tbody>
               <tr><td><span class="dot m-c"></span>Carbohidratos</td><td class="num"><input type="number" id="cMin" value="55" step="1"></td><td class="num"><input type="number" id="cMax" value="60" step="1"></td><td class="num"><input type="number" id="cMeta" value="55" step="0.5"></td><td class="num" id="cG">–</td><td class="num" id="cGk">–</td></tr>
@@ -744,7 +932,7 @@ tr.na td{color:var(--muted)}
       </div>
       <div class="macro-bar" id="pBar" style="margin-top:14px"></div>
       <div class="tbl-wrap">
-        <table>
+        <table class="stack">
           <thead><tr><th>Nutriente</th><th class="num">Meta</th><th class="num">Aporte</th><th class="num">% adecuación</th><th class="num">% VCT</th><th>Estado</th></tr></thead>
           <tbody id="adqBody"></tbody>
         </table>
@@ -784,7 +972,7 @@ tr.na td{color:var(--muted)}
   <div id="view-pred" role="tabpanel" aria-labelledby="tab-pred" class="pacgrid" hidden>
     <aside class="panel">
       <h2>Mediciones</h2>
-      <p class="note" style="margin:0 0 12px">Para pacientes postrados o que no se pueden posicionar en el tallímetro o la balanza. Completa solo lo que tengas: cada ecuación indica qué le falta.</p>
+      <p class="note" style="margin:0 0 12px">Para pacientes postrados o hospitalizados que no se pueden posicionar en el tallímetro o la balanza. Todos los campos son opcionales: completa solo lo que tengas y cada ecuación indica qué le falta. La talla no requiere pliegue subescapular ni circunferencia abdominal, y sin media envergadura se estima con altura de rodilla (Chumlea o Lera).</p>
       <form id="pf" autocomplete="off">
         <div class="seg" role="group" aria-label="Sexo">
           <button type="button" data-psx="M" aria-pressed="true">Hombre</button>
@@ -793,12 +981,13 @@ tr.na td{color:var(--muted)}
         <div class="fgrid" style="margin-top:10px">
           <label>Edad (años)<input type="number" id="pEdad" min="18" max="110"></label>
           <label>Altura de rodilla (cm)<input type="number" id="pAR" step="0.1" min="30" max="75"></label>
-          <label>Media envergadura (cm)<input type="number" id="pSE" step="0.1" min="50" max="110"></label>
+          <label>Media envergadura (cm) · opcional<input type="number" id="pSE" step="0.1" min="50" max="110"></label>
           <label>Circunferencia brazo (cm)<input type="number" id="pCB" step="0.1" min="10" max="60"></label>
           <label>Circunferencia pantorrilla (cm)<input type="number" id="pCP" step="0.1" min="15" max="60"></label>
-          <label>Circunferencia abdominal (cm)<input type="number" id="pCA" step="0.1" min="40" max="200"></label>
-          <label>Pliegue subescapular (mm)<input type="number" id="pPSE" step="0.5" min="2" max="70"></label>
+          <label>Circunferencia abdominal (cm) · opcional<input type="number" id="pCA" step="0.1" min="40" max="200"></label>
+          <label>Pliegue subescapular (mm) · opcional<input type="number" id="pPSE" step="0.5" min="2" max="70"></label>
           <label>Pliegue tricipital (mm)<input type="number" id="pPT" step="0.5" min="2" max="70"></label>
+          <label>Pliegue bicipital (mm) · opcional<input type="number" id="pPB" step="0.5" min="2" max="70"></label>
         </div>
       </form>
       <div class="btnrow">
@@ -812,7 +1001,8 @@ tr.na td{color:var(--muted)}
           <li><b>Media envergadura:</b> brazo extendido a 90° del tronco. Desde la escotadura esternal hasta la punta del dedo medio.</li>
           <li><b>Circunferencia de brazo:</b> punto medio entre acromion y olécranon, brazo relajado.</li>
           <li><b>Pantorrilla:</b> perímetro máximo con la rodilla en 90°.</li>
-          <li><b>Pliegues:</b> tricipital en el punto medio posterior del brazo; subescapular 1–2 cm bajo el ángulo inferior de la escápula, a 45°.</li>
+          <li><b>Pliegues:</b> tricipital en el punto medio posterior del brazo; bicipital en la cara anterior del brazo, sobre el vientre del bíceps, a la altura del punto medio acromion–olécranon, pliegue vertical; subescapular 1–2 cm bajo el ángulo inferior de la escápula, a 45°.</li>
+          <li><b>Circunferencia abdominal (Rabito):</b> a nivel del ombligo, paciente en decúbito supino.</li>
         </ul>
       </details>
     </aside>
@@ -841,11 +1031,25 @@ tr.na td{color:var(--muted)}
       </section>
       <section class="panel">
         <h2>Composición del brazo · Frisancho 1981</h2>
+        <div class="frcards" id="frCards"></div>
         <div class="tbl-wrap"><table>
           <thead><tr><th>Indicador</th><th class="num">Valor</th><th class="num">Percentil</th><th>Clasificación</th></tr></thead>
           <tbody id="pFBody"></tbody>
         </table></div>
-        <p class="note">CMB = CB − π × PT. AMB = (CB − π × PT)² / 4π. AGB = CB² / 4π − AMB (CB y PT en mm). Percentiles de Frisancho 1981 (NHANES I, 18–74,9 años), interpolados entre P5, P10, P25, P50, P75, P90 y P95. Clasificación: ≤P5 déficit · P5–P15 bajo el promedio · P15–P85 promedio · P85–P95 sobre el promedio · &gt;P95 alto.</p>
+        <div class="frfull">
+          <div class="frfull-h"><h3 id="frTitle">Tablas de referencia</h3>
+            <div class="seg" role="group" aria-label="Tabla de Frisancho" id="frTabs">
+              <button type="button" data-frt="cb" aria-pressed="false">CB</button>
+              <button type="button" data-frt="pt" aria-pressed="false">PT</button>
+              <button type="button" data-frt="cmb" aria-pressed="false">CMB</button>
+              <button type="button" data-frt="ama" aria-pressed="true">AMB</button>
+              <button type="button" data-frt="afa" aria-pressed="false">AGB</button>
+            </div>
+          </div>
+          <div id="frChart"></div>
+          <div class="tbl-wrap"><table class="frtbl" id="frTbl"></table></div>
+        </div>
+        <p class="note">CMB = CB − π × PT. AMB = (CB − π × PT)² / 4π. AGB = CB² / 4π − AMB (CB y PT en mm). Percentiles de Frisancho 1981 (NHANES I 1971–74, hombres y mujeres de 18–74,9 años; CB, PT, CMB, AMB y AGB), interpolados entre P5, P10, P25, P50, P75, P90 y P95. Clasificación: ≤P5 déficit · P5–P15 bajo el promedio · P15–P85 promedio · P85–P95 sobre el promedio · &gt;P95 alto.</p>
       </section>
       <section class="panel">
         <h2>Fuentes</h2>
@@ -853,6 +1057,7 @@ tr.na td{color:var(--muted)}
           <li>Chumlea WC, Roche AF, Steinbaugh ML. Estimating stature from knee height for persons 60 to 90 years of age. J Am Geriatr Soc 1985.</li>
           <li>Chumlea WC, Guo SS, Steinbaugh ML. Prediction of stature from knee height for black and white adults and children. J Am Diet Assoc 1994 (ecuaciones 19–59 años).</li>
           <li>Chumlea WC, Guo S, Roche AF, Steinbaugh ML. Prediction of body weight for the nonambulatory elderly from anthropometry. J Am Diet Assoc 1988.</li>
+          <li>Ecuaciones de peso con altura de rodilla y circunferencia de brazo (Chumlea; Ross Laboratories 1987), por sexo y edad, versión para población blanca. Error estándar cercano a ±10 kg en algunos grupos: usar solo si no hay CA ni PSE.</li>
           <li>Lera L, Santos JL, García C, Arroyo P, Albala C. Predictive equations for stature in the elderly: a study in three Latin American cities. Ann Hum Biol 2005 (ecuación de Santiago de Chile).</li>
           <li>Rabito EI, Vannucchi GB, Suen VMM, Castilho Neto LL, Marchini JS. Weight and height prediction of immobilized patients. Rev Nutr 2006;19(6):655-61 (sexo: 1 = hombre, 2 = mujer).</li>
           <li>Frisancho AR. New norms of upper limb fat and muscle areas for assessment of nutritional status. Am J Clin Nutr 1981;34:2540-5.</li>
@@ -916,7 +1121,7 @@ tr.na td{color:var(--muted)}
   const val = id => parseFloat($(id).value);
   function readGoals(raw){
     const ids=['cMin','cMax','cMeta','pMin','pMax','pMeta','lMin','lMax','lMeta'];
-    if(raw){ const o={}; ids.forEach(i=>o[i]=$(i).value); o.share=SHARE.slice(); return o; }
+    if(raw){ const o={}; ids.forEach(i=>o[i]=$(i).value); o.share=SHARE.slice(); o.sync=$('goalSync').checked; return o; }
     return {c:[val('cMin'),val('cMax'),val('cMeta')], p:[val('pMin'),val('pMax'),val('pMeta')], l:[val('lMin'),val('lMax'),val('lMeta')], share:SHARE};
   }
   function targets(){
@@ -1048,7 +1253,7 @@ tr.na td{color:var(--muted)}
     const T=targets(), t=sum(all()), S=4*t.c+4*t.p+9*t.l;
     const d={c:S?4*t.c/S*100:0, p:S?4*t.p/S*100:0, l:S?9*t.l/S*100:0};
     const inAdq=a=>a>=90&&a<=110;
-    const distChip=(m)=>{ const [lo,hi]=T.G[m], v=r1(d[m]); return status(v>=lo&&v<=hi, v>=lo-0.5&&v<=hi+0.5, `En rango ${lo}–${hi} %`, `Redondeo (${lo}–${hi} %)`, `Fuera de ${lo}–${hi} %`); };
+    const distChip=(m)=>{ const [lo,hi]=T.G[m], v=r1(d[m]), f1=x=>fmt(x,x%1?1:0), rg=`${f1(lo)}–${f1(hi)}`; return status(v>=lo&&v<=hi, v>=lo-0.5&&v<=hi+0.5, `En rango ${rg} %`, `Redondeo (${rg} %)`, `Fuera de ${rg} %`); };
     const adqChip=a=>status(inAdq(a), false, 'Adecuado','', a<90?'Déficit':'Exceso');
     const rows=[];
     const aK=t.k/T.V*100;
@@ -1174,14 +1379,31 @@ tr.na td{color:var(--muted)}
     plan.forEach((items,mi)=>{ const st=sum(items); s+=`\n${MEALS[mi].toUpperCase()} (${fmt(st.k)} kcal)\n`; items.forEach(it=>{ const f=BY.get(it.c); s+=`- ${f[1].replace(/\s*\(.*?\)\s*$/,'')}: ${fmt(it.g)} g\n`; }); });
     s+=`\nAPORTE TOTAL: ${fmt(t.k)} kcal (${fmt(t.k/T.V*100,0)}% adecuación)\nCHO ${fmt(t.c,1)} g (${fmt(4*t.c/S*100,1)}%) · P ${fmt(t.p,1)} g (${fmt(4*t.p/S*100,1)}%) · L ${fmt(t.l,1)} g (${fmt(9*t.l/S*100,1)}%)\nFibra ${fmt(t.fi,1)} g · Sodio ${fmt(t.na)} mg\nFuente: Tabla de Composición Química de Alimentos INTA 2018.`;
     const msg=$('planMsg');
-    try{ navigator.clipboard.writeText(s).then(()=>{msg.textContent='Plan copiado.';},()=>{msg.textContent='No se pudo copiar desde este visor.';}); }catch(e){ msg.textContent='No se pudo copiar desde este visor.'; }
+    try{ navigator.clipboard.writeText(s).then(()=>{msg.textContent='Plan copiado.';},()=>{msg.textContent='No se pudo copiar desde este navegador.';}); }catch(e){ msg.textContent='No se pudo copiar desde este navegador.'; }
   });
 
   // Requerimientos desde la pestaña de evaluación
   plan=fromDefault();
   let lastV=null;
+
+  // Meta del plan = prescripción de Evaluación (proteína g/kg, lípidos y carbohidratos)
+  function syncGoals(){
+    const on=$('goalSync').checked;
+    ['cMeta','pMeta','lMeta'].forEach(i=>{ $(i).readOnly=on; $(i).title=on?'Viene de la prescripción de Evaluación':''; });
+    if(!on||!REQ||!isFinite(REQ.pP)||!isFinite(REQ.lP)) return false;
+    const r=x=>Math.round(x*10)/10, p=r(REQ.pP), l=r(REQ.lP), c=r(100-p-l);
+    let ch=false;
+    for(const [m,v] of [['c',c],['p',p],['l',l]]){
+      if(parseFloat($(m+'Meta').value)!==v){ $(m+'Meta').value=v; ch=true; }
+      const lo=parseFloat($(m+'Min').value), hi=parseFloat($(m+'Max').value);
+      if(!(v>=lo&&v<=hi)){ $(m+'Min').value=Math.max(0,r(v-2.5)); $(m+'Max').value=r(v+2.5); ch=true; }
+    }
+    return ch;
+  }
+  $('goalSync').addEventListener('change',()=>{ syncGoals(); save(); render(); });
   window.addEventListener('req',e=>{
     REQ=e.detail;
+    if(syncGoals()) save();
     if(REQ){
       if(pendingFit){ fit(); pendingFit=false; save(); }
       else if(lastV!=null && Math.abs(REQ.get-lastV)>1) needsFit=true;
@@ -1201,15 +1423,16 @@ tr.na td{color:var(--muted)}
              : n===MEAL_DEF.length ? MEAL_DEF.slice() : Array.from({length:n},(_,i)=>'Comida '+(i+1));
         plan=MEALS.map((_,i)=>(s.plan[i]||[]).filter(it=>BY.has(it.c)).map(it=>({c:it.c,g:Math.max(0,+it.g||0),lock:!!it.lock})));
         const g=s.goals||{};
-        for(const k in g){ if(k!=='share' && $(k)) $(k).value=g[k]; }
+        for(const k in g){ if(k!=='share' && k!=='sync' && $(k)) $(k).value=g[k]; }
+        $('goalSync').checked = g.sync!==false;
         SHARE=(Array.isArray(g.share)&&g.share.length===MEALS.length)?g.share.map(Number):MEALS.map(()=>Math.round(1000/MEALS.length)/10);
         $('planNotes').value=s.notes||'';
         pendingFit=false;
       } else {
-        plan=fromDefault(); SHARE=SHARE_DEF.slice(); GOAL_DEF.forEach(([i,v])=>$(i).value=v);
+        plan=fromDefault(); SHARE=SHARE_DEF.slice(); GOAL_DEF.forEach(([i,v])=>$(i).value=v); $('goalSync').checked=true;
         $('planNotes').value=''; pendingFit=true;
       }
-      lastV=null; needsFit=false; render();
+      lastV=null; needsFit=false; syncGoals(); render();
     },
     meals:()=>MEALS.slice(),
     fit(){ fit(); render(); },
@@ -1260,7 +1483,8 @@ tr.na td{color:var(--muted)}
 
   function calc(){
     const edad=num('edad'), peso=num('peso'), talla=num('talla'), cin=num('cintura');
-    const fa=num('fa'), fe=num('fe'), prot=num('prot'), lip=num('lip'), agua=num('agua');
+    const fa=num('fa'), fe=num('fe'), prot=num('prot'), agua=num('agua');
+    let lip=num('lip');
     const imcObj=num('imcObj');
     const alerts=[];
     const valid = [edad,peso,talla].every(v=>isFinite(v)&&v>0);
@@ -1272,12 +1496,14 @@ tr.na td{color:var(--muted)}
     const pi = imcObj*tm*tm;
     const pa = pi + 0.25*(peso-pi);
     const pct = peso/pi*100;
+    const imcMax = am?28:25, pma = imcMax*tm*tm;
 
     let modo = $('pesoCalc').value;
     let modoReal = modo;
     if(modo==='auto'){ modoReal = (am? imc>=32 : imc>=30) ? 'ajustado' : (imc < (am?23:18.5) ? 'actual' : 'actual'); }
-    const pc = modoReal==='ideal'? pi : modoReal==='ajustado'? pa : peso;
-    const pcLabel = {actual:'actual',ideal:'ideal',ajustado:'ajustado'}[modoReal];
+    const pc = modoReal==='ideal'? pi : modoReal==='ajustado'? pa : modoReal==='maximo'? pma : peso;
+    const pcLabel = {actual:'actual',ideal:'ideal',ajustado:'ajustado',maximo:'máximo aceptable'}[modoReal];
+    if(modoReal==='maximo' && pma>peso) alerts.push('El peso máximo aceptable supera al actual: en este paciente corresponde calcular con peso actual.');
     if(modoReal==='ajustado' && pa>peso) alerts.push('El peso ajustado supera al actual (paciente bajo el peso ideal). Revisa el peso de cálculo.');
 
     // Ecuaciones
@@ -1295,19 +1521,42 @@ tr.na td{color:var(--muted)}
     ];
     const eq=$('eqSel').value;
     let get=0;
+    $('kcalkgL').hidden = eq!=='kcalkg'; $('vctManL').hidden = eq!=='manual';
     let html = rows.map(r=>{ const g=r[2]*f; if(r[0]===eq) get=g;
       return `<tr class="${r[0]===eq?'sel':''}"><td>${r[1]}${r[3]?`<small>${r[3]}</small>`:''}</td><td class="num">${fmt(r[2])}</td><td class="num">${fmt(g)}</td><td class="num">${fmt(g/W,1)}</td></tr>`; }).join('');
-    html += `<tr><td>Regla práctica<small>25–30 kcal/kg de peso ${pcLabel}</small></td><td class="num">–</td><td class="num">${fmt(25*W)}–${fmt(30*W)}</td><td class="num">25–30</td></tr>`;
+    let eqRow=rows.find(r=>r[0]===eq);
+    if(eq==='kcalkg'){ const kk=num('kcalkg'); if(isFinite(kk)&&kk>0){ get=kk*W; eqRow=['kcalkg',`${fmt(kk,1)} kcal/kg × peso ${pcLabel}`,NaN]; } else { alerts.push('Ingresa las kcal/kg indicadas.'); eqRow=null; } }
+    if(eq==='manual'){ const vm=num('vctMan'); if(isFinite(vm)&&vm>0){ get=vm; eqRow=['manual','VCT indicado manualmente',NaN]; } else { alerts.push('Ingresa el VCT indicado en kcal/día.'); eqRow=null; } }
+    if(!eqRow){ eqRow=rows[0]; get=rows[0][2]*f; }
+    if(eq==='kcalkg'||eq==='manual') alerts.push('El VCT se fija directamente: no se le aplican el factor de actividad ni el de estrés.');
+    html = rows.map(r=>`<tr class="${r[0]===eqRow[0]?'sel':''}" data-eq="${r[0]}"><td>${r[1]}${r[3]?`<small>${r[3]}</small>`:''}</td><td class="num">${fmt(r[2])}</td><td class="num">${fmt(r[2]*f)}</td><td class="num">${fmt(r[2]*f/W,1)}</td></tr>`).join('');
+    html += `<tr class="${eq==='kcalkg'?'sel':''}" data-eq="kcalkg"><td>kcal/kg indicadas<small>${eq==='kcalkg'?eqRow[1]:'25–30 kcal/kg de peso '+pcLabel+' (toca para usar)'}</small></td><td class="num">–</td><td class="num">${eq==='kcalkg'?fmt(get):fmt(25*W)+'–'+fmt(30*W)}</td><td class="num">${eq==='kcalkg'?fmt(get/W,1):'25–30'}</td></tr>`;
+    html += `<tr class="${eq==='manual'?'sel':''}" data-eq="manual"><td>VCT indicado<small>${eq==='manual'?'valor fijado manualmente':'toca para escribir el VCT'}</small></td><td class="num">–</td><td class="num">${eq==='manual'?fmt(get):'–'}</td><td class="num">${eq==='manual'?fmt(get/W,1):'–'}</td></tr>`;
     $('getBody').innerHTML = html;
 
     // Macros
     const pG = prot*pc, pK = pG*4, pP = pK/get*100;
-    const lK = get*lip/100, lG = lK/9;
-    const cK = get - pK - lK, cG = cK/4, cP = cK/get*100;
+    const choMode=$('choMode').value, choV=num('choVal');
+    $('choValL').hidden = choMode==='resto';
+    $('choValT').textContent = choMode==='gkg' ? 'Carbohidratos (g/kg)' : 'Carbohidratos (% VCT)';
+    const choFix = choMode!=='resto' && isFinite(choV) && choV>0;
+    $('lip').disabled = choFix; $('lipT').textContent = choFix ? 'Lípidos (por diferencia)' : 'Lípidos (% VCT)';
+    $('macroNote').textContent = 'Proteína en g/kg sobre el peso de cálculo; ' + (choFix ? 'carbohidratos fijados en '+(choMode==='pct'?'% del VCT':'g/kg')+'; lípidos por diferencia.' : 'lípidos en % fijo; carbohidratos por diferencia.') + ' Cámbialo en Prescripción › Carbohidratos.';
+    let lK, cK;
+    if(choFix){
+      cK = choMode==='pct' ? get*choV/100 : choV*pc*4; lK = get - pK - cK; lip = lK/get*100;
+      if(lK<0) alerts.push('Proteína y carbohidratos superan el VCT: los lípidos quedan negativos. Baja alguno de los dos.');
+      else if(lip<20) alerts.push(`Con los carbohidratos fijados, los lípidos quedan en ${fmt(lip,0)} % del VCT (bajo el 20 % recomendado).`);
+      else if(lip>35) alerts.push(`Con los carbohidratos fijados, los lípidos quedan en ${fmt(lip,0)} % del VCT (sobre el 35 % recomendado).`);
+    } else {
+      if(choMode!=='resto') alerts.push('Ingresa el valor de carbohidratos o vuelve a «Por diferencia».');
+      lK = get*lip/100; cK = get - pK - lK;
+    }
+    const lG = lK/9, cG = cK/4, cP = cK/get*100;
     if(cP<40) alerts.push(`Carbohidratos quedan en ${fmt(cP,0)}% del VCT, bajo el 45% mínimo recomendado para adulto sano. Ajusta lípidos o proteína si no es intencional.`);
     if(cK<0) alerts.push('La suma de proteína y lípidos supera el VCT.');
     $('macroBody').innerHTML = [
-      ['Proteínas',pG,pP,'m-p'],['Lípidos',lG,lip,'m-l'],['Carbohidratos',cG,cP,'m-c']
+      ['Proteínas',pG,pP,'m-p'],['Lípidos'+(choFix?'<small>por diferencia</small>':''),lG,lip,'m-l'],['Carbohidratos'+(choFix?`<small>fijado: ${choMode==='pct'?fmt(choV,1)+' % del VCT':fmt(choV,1)+' g/kg'}</small>`:'<small>por diferencia</small>'),cG,cP,'m-c']
     ].map(r=>`<tr><td>${r[0]}</td><td class="num">${fmt(r[1])}</td><td class="num">${fmt(r[1]/pc,1)}</td><td class="num">${fmt(r[2],0)}%</td></tr>`).join('')
       + `<tr><td>Agua<small>${fmt(agua)} ml/kg</small></td><td class="num" colspan="3">${fmt(agua*pc)} ml</td></tr>`;
     const seg=(p,c,t)=>`<div class="${c}" style="width:${Math.max(p,0)}%">${p>=9?t+' '+fmt(p,0)+'%':''}</div>`;
@@ -1317,6 +1566,8 @@ tr.na td{color:var(--muted)}
 
     // Antropometría
     $('pAj').textContent = fmt(pa,1)+' kg';
+    $('pMaxAj').textContent = fmt(pma,1)+' kg';
+    $('pMaxNote').textContent = 'IMC '+imcMax+' × talla²'+(am?' (límite superior normal AM, MINSAL)':' (límite superior normal, OMS)');
     $('pPct').textContent = fmt(pct,0)+' %';
     const lo = (am?23:18.5)*tm*tm, hi=(am?27.9:24.9)*tm*tm;
     $('pRango').textContent = fmt(lo,1)+'–'+fmt(hi,1)+' kg';
@@ -1338,7 +1589,7 @@ tr.na td{color:var(--muted)}
     $('kPi').innerHTML = fmt(pi,1)+'<small>kg</small>';
     $('kPiNote').textContent = 'IMC '+fmt(imcObj,1)+(am && imcObj<23?' · bajo rango AM':'');
     $('kGet').innerHTML = fmt(get)+'<small>kcal</small>';
-    $('kGetNote').textContent = rows.find(r=>r[0]===eq)[1];
+    $('kGetNote').textContent = eqRow[1];
     $('kProt').innerHTML = fmt(pG)+'<small>g</small>';
     $('kProtNote').textContent = fmt(prot,1)+' g/kg · peso '+pcLabel;
     $('pesoUsado').textContent = pcLabel+' ('+fmt(pc,1)+' kg)'+(modo==='auto'?' · automático':'');
@@ -1346,10 +1597,10 @@ tr.na td{color:var(--muted)}
     if(am && imcObj<23) alerts.push('En adulto mayor el IMC objetivo suele situarse en el rango 23–27,9 (MINSAL). Considera ajustarlo.');
     $('alerts').innerHTML = alerts.map(a=>`<div class="warnbox" style="margin-bottom:8px">${a}</div>`).join('');
 
-    LAST={M, edad, peso, talla, cin, cinTxt, imc, cls, am, pi, pa, pct, pc, pcLabel, imcObj, lo, hi,
-      eqName: rows.find(r=>r[0]===eq)[1], geb: rows.find(r=>r[0]===eq)[2], fa, fe, faTxt: $('fa').selectedOptions[0].textContent.split('·')[0].trim(),
+    LAST={M, edad, peso, talla, cin, cinTxt, imc, cls, am, pi, pa, pma, imcMax, pct, pc, pcLabel, imcObj, lo, hi,
+      eqName: eqRow[1], geb: eqRow[2], fa, fe, faTxt: $('fa').selectedOptions[0].textContent.split('·')[0].trim(),
       get, pG, prot, pP, lG, lip, cG, cP, agua, aguaMl: agua*pc};
-    window.dispatchEvent(new CustomEvent('req',{detail:{get, pc, pcLabel, peso, eq: rows.find(r=>r[0]===eq)[1], fa, fe, protG: pG, protKg: prot}}));
+    window.dispatchEvent(new CustomEvent('req',{detail:{get, pc, pcLabel, peso, eq: eqRow[1], fa, fe, protG: pG, protKg: prot, pP, lP: lip, cP, cG, lG, choFix}}));
 
     // Resumen
     const faTxt = $('fa').selectedOptions[0].textContent.split('·')[0].trim();
@@ -1358,15 +1609,15 @@ tr.na td{color:var(--muted)}
 ${M?'Hombre':'Mujer'}, ${fmt(edad)} años
 Peso ${fmt(peso,1)} kg · Talla ${fmt(talla,1)} cm · IMC ${fmt(imc,1)} kg/m²
 Dx IMC: ${cls} (${am?'MINSAL AM':'OMS'})
-${isFinite(cin)?`CC ${fmt(cin,1)} cm: ${cinTxt}\n`:''}PI (IMC ${fmt(imcObj,1)}) ${fmt(pi,1)} kg · PAj ${fmt(pa,1)} kg · %PI ${fmt(pct,0)}%
+${isFinite(cin)?`CC ${fmt(cin,1)} cm: ${cinTxt}\n`:''}${vitTxt()?vitTxt()+'\n':''}${bioTxt()?bioTxt()+'\n':''}${xTxt()?xTxt()+'\n':''}PI (IMC ${fmt(imcObj,1)}) ${fmt(pi,1)} kg · PAj ${fmt(pa,1)} kg · PMA ${fmt(pma,1)} kg · %PI ${fmt(pct,0)}%
 
 REQUERIMIENTOS (peso ${pcLabel}: ${fmt(pc,1)} kg)
-GEB ${rows.find(r=>r[0]===eq)[1]}: ${fmt(rows.find(r=>r[0]===eq)[2])} kcal
+GEB ${eqRow[1]}: ${fmt(eqRow[2])} kcal
 FA ${String(fa).replace('.',',')} (${faTxt}) · FE ${String(fe).replace('.',',')}
 VCT: ${fmt(get)} kcal (${fmt(get/pc,1)} kcal/kg)
 Proteínas: ${fmt(pG)} g (${fmt(prot,1)} g/kg · ${fmt(pP,0)}%)
 Lípidos: ${fmt(lG)} g (${fmt(lip,0)}%)
-Carbohidratos: ${fmt(cG)} g (${fmt(cP,0)}%)
+Carbohidratos: ${fmt(cG)} g (${fmt(cP,0)}%${choFix?', fijado':''})
 Agua: ${fmt(agua*pc)} ml/día`;
 
     const tone = {'c-ok':'t-mint','c-warn':'t-amber','c-bad':'t-coral','c-low':'t-sky'}[cc] || 't-mint';
@@ -1376,16 +1627,17 @@ Agua: ${fmt(agua*pc)} ml/día`;
 `<div class="rs-head"><span class="rs-tag">FICHA</span><span class="rs-who">${M?'Hombre':'Mujer'}, ${fmt(edad)} años</span><span class="rs-meta">Peso ${fmt(peso,1)} kg · Talla ${fmt(talla,1)} cm${isFinite(cin)?' · Cintura '+fmt(cin,1)+' cm':''}</span></div>
 <div class="rs-grid">
   <div class="rs-tile ${tone}"><span>IMC</span><b>${fmt(imc,1)}</b><i>${cls} · ${am?'MINSAL AM':'OMS'}</i></div>
-  <div class="rs-tile t-amber"><span>Peso ideal</span><b>${fmt(pi,1)} kg</b><i>PAj ${fmt(pa,1)} kg · ${fmt(pct,0)} % del PI</i></div>
+  <div class="rs-tile t-amber"><span>Peso ideal</span><b>${fmt(pi,1)} kg</b><i>PAj ${fmt(pa,1)} kg · PMA ${fmt(pma,1)} kg · ${fmt(pct,0)} % del PI</i></div>
   <div class="rs-tile t-lime"><span>VCT</span><b>${fmt(get)}</b><i>kcal/día · ${fmt(get/pc,1)} kcal/kg</i></div>
   <div class="rs-tile t-sky"><span>Agua</span><b>${fmt(agua*pc)}</b><i>ml/día · ${fmt(agua)} ml/kg</i></div>
 </div>
 <div class="rs-mac">${mrow('Proteínas',pG,pP,'#ff6b57')}${mrow('Lípidos',lG,lip,'#ffb020')}${mrow('Carbohidratos',cG,cP,'#4cc3ff')}</div>
 <ul class="rs-lines">
-  <li><strong>GEB</strong> ${rows.find(r=>r[0]===eq)[1]}: ${fmt(rows.find(r=>r[0]===eq)[2])} kcal</li>
+  <li><strong>GEB</strong> ${eqRow[1]}: ${fmt(eqRow[2])} kcal</li>
   <li><strong>Factores</strong> FA ${String(fa).replace('.',',')} (${faTxt}) · FE ${String(fe).replace('.',',')}</li>
   <li><strong>Peso de cálculo</strong> ${pcLabel}, ${fmt(pc,1)} kg</li>
   ${isFinite(cin)?`<li><strong>Cintura</strong> ${cinTxt}</li>`:''}
+  ${vitList().out.map(r=>`<li><strong>${r.n}</strong> ${r.v} · ${r.c[0]}</li>`).join('')}
 </ul>`;
   }
 
@@ -1400,13 +1652,218 @@ Agua: ${fmt(agua*pc)} ml/día`;
 
   $('feSel').addEventListener('change',e=>{ if(e.target.value!=='custom') $('fe').value=e.target.value; else $('fe').focus(); });
   $('fe').addEventListener('input',()=>{ const v=$('fe').value; const o=[...$('feSel').options].find(o=>o.value===String(parseFloat(v)) || parseFloat(o.value)===parseFloat(v)); $('feSel').value = o? o.value : 'custom'; });
-  $('f').addEventListener('input',()=>{ markEdited(); calc(); });
-  $('f').addEventListener('change',calc);
+  $('f').addEventListener('input',()=>{ markEdited(); calc(); vitals(); bio(); });
+  window.addEventListener('patchange',()=>bio());
+  $('f').addEventListener('change',()=>{ calc(); vitals(); bio(); });
   $('f').addEventListener('submit',e=>e.preventDefault());
 
+  // ---------- Signos vitales y glicemia ----------
+  const VIT0={pas:'',pad:'',fc:'',glic:'',glicMom:'hosp',hba1c:''};
+  function vitList(){
+    const g=k=>{ const x=parseFloat($(k).value); return isFinite(x)&&x>0?x:NaN; };
+    const pas=g('pas'), pad=g('pad'), fc=g('fc'), gl=g('glic'), a1c=g('hba1c'), mom=$('glicMom').value;
+    const out=[], al=[];
+    if(isFinite(pas)&&isFinite(pad)){
+      let c;
+      if(pas<90||pad<60) c=['Hipotensión','c-low'];
+      else if(pas>=180||pad>=110) c=['HTA etapa 3','c-bad'];
+      else if(pas>=160||pad>=100) c=['HTA etapa 2','c-bad'];
+      else if(pas>=140||pad>=90) c=['HTA etapa 1','c-warn'];
+      else if(pas>=130||pad>=85) c=['Normal alta','c-warn'];
+      else if(pas>=120||pad>=80) c=['Normal','c-ok'];
+      else c=['Óptima','c-ok'];
+      out.push({n:'Presión arterial',v:fmt(pas)+'/'+fmt(pad)+' mmHg',c,r:'Meta en HTA <140/90'});
+      if(pas>=180||pad>=110) al.push('PA ≥180/110 mmHg: informar al médico tratante.');
+    } else if(isFinite(pas)||isFinite(pad)) out.push({n:'Presión arterial',v:'Incompleta',c:['Falta sistólica o diastólica','c-mut'],r:''});
+    if(isFinite(fc)) out.push({n:'Frecuencia cardíaca',v:fmt(fc)+' lpm',c:fc<60?['Bradicardia','c-low']:fc>100?['Taquicardia','c-warn']:['Normal','c-ok'],r:'60–100 lpm en reposo'});
+    if(isFinite(gl)){
+      const M={hosp:[140,180,'Hospitalizado 140–180'],ayu:[80,130,'Ayunas 80–130'],post:[70,180,'Postprandial <180']}[mom]||[140,180,'Hospitalizado 140–180'];
+      let c;
+      if(gl<54) c=['Hipoglicemia nivel 2','c-bad'];
+      else if(gl<70) c=['Hipoglicemia nivel 1','c-bad'];
+      else if(gl>250) c=['Hiperglicemia marcada','c-bad'];
+      else if(gl>M[1]) c=['Sobre la meta','c-warn'];
+      else if(gl<M[0]) c= mom==='hosp' ? ['Bajo 140 · aceptable sin hipoglicemias','c-ok'] : ['Bajo la meta','c-low'];
+      else c=['En meta','c-ok'];
+      out.push({n:'Glicemia',v:fmt(gl)+' mg/dL',c,r:M[2]+' mg/dL'});
+      if(gl<70) al.push('Glicemia <70 mg/dL: aplicar el protocolo de hipoglicemia del servicio e informar al médico tratante.');
+      else if(gl>250) al.push('Glicemia >250 mg/dL: informar al médico tratante.');
+    }
+    if(isFinite(a1c)) out.push({n:'HbA1c',v:fmt(a1c,1)+' %',c:a1c<7?['En meta general','c-ok']:a1c<8?['Sobre meta general (<8 % aceptable en AM frágil)','c-warn']:['Sobre la meta','c-bad'],r:'Meta general <7 %'});
+    return {out,al};
+  }
+  function vitals(){
+    const {out,al}=vitList();
+    $('vitAlerts').innerHTML=al.map(a=>`<div class="warnbox" style="margin-bottom:8px">${a}</div>`).join('');
+    $('vitBody').innerHTML=out.length ? out.map(r=>`<tr><td>${r.n}</td><td class="num">${r.v}</td><td><span class="chip ${r.c[1]}">${r.c[0]}</span></td><td><small>${r.r}</small></td></tr>`).join('')
+      : '<tr><td colspan="4" class="c-mut">Sin registros. Ingresa PA, frecuencia cardíaca, glicemia o HbA1c en Datos del paciente.</td></tr>';
+  }
+  const vitTxt=()=>vitList().out.map(r=>`${r.n}: ${r.v} (${r.c[0]})`).join('\n');
+  // ---------- Exámenes bioquímicos y riesgo cardiovascular ----------
+  const BIO0={ct:'',hdl:'',ldl:'',tg:'',crea:'',bun:'',rac:'',alb:'',preal:'',pcr:'',linf:'',na:'',kk:'',fos:'',mg:'',ecv:'',htaR:'',tabaco:'',antiHTA:''};
+  function egfrOf(f){
+    const scr=parseFloat(f.crea), age=parseFloat(f.edad), fem=f.sexo==='F';
+    if(!(scr>0)||!(age>=18)) return NaN;
+    const k=fem?0.7:0.9, a=fem?-0.241:-0.302;
+    return 142*Math.pow(Math.min(scr/k,1),a)*Math.pow(Math.max(scr/k,1),-1.2)*Math.pow(0.9938,age)*(fem?1.012:1);
+  }
+  function bioList(){
+    const g=k=>{ const x=parseFloat($(k).value); return isFinite(x)&&x>0?x:NaN; };
+    const f=window.EVAL?EVAL.get():{}; const fem=sexo==='F';
+    const out=[], al=[];
+    const row=(n,v,c,r)=>out.push({n,v,c,r});
+    // Lípidos
+    const ct=g('ct'), hdl=g('hdl'), tg=g('tg'); let ldl=g('ldl'), ldlCalc=false;
+    if(!isFinite(ldl) && isFinite(ct)&&isFinite(hdl)&&isFinite(tg) && tg<400){ ldl=ct-hdl-tg/5; ldlCalc=true; }
+    if(isFinite(ct)) row('Colesterol total',fmt(ct)+' mg/dL',ct<200?['Deseable','c-ok']:ct<240?['Limítrofe alto','c-warn']:['Alto','c-bad'],'<200 deseable');
+    if(isFinite(ldl)) row('Colesterol LDL'+(ldlCalc?' (Friedewald)':''),fmt(ldl)+' mg/dL',ldl<100?['Óptimo','c-ok']:ldl<130?['Casi óptimo','c-ok']:ldl<160?['Limítrofe alto','c-warn']:ldl<190?['Alto','c-bad']:['Muy alto','c-bad'],'<100 óptimo');
+    if(isFinite(hdl)) row('Colesterol HDL',fmt(hdl)+' mg/dL',hdl>=60?['Protector','c-ok']:hdl<(fem?50:40)?['Bajo','c-bad']:['Normal','c-ok'],fem?'≥50 en mujeres':'≥40 en hombres');
+    if(isFinite(tg)) row('Triglicéridos',fmt(tg)+' mg/dL',tg<150?['Normal','c-ok']:tg<200?['Limítrofe alto','c-warn']:tg<500?['Alto','c-bad']:['Muy alto · riesgo de pancreatitis','c-bad'],'<150');
+    if(isFinite(ct)&&isFinite(hdl)) row('Colesterol no-HDL',fmt(ct-hdl)+' mg/dL',ct-hdl<130?['Óptimo','c-ok']:ct-hdl<160?['Casi óptimo','c-ok']:ct-hdl<190?['Limítrofe alto','c-warn']:['Alto','c-bad'],'Meta: meta de LDL + 30');
+    if(!isFinite(g('ldl')) && isFinite(tg) && tg>=400 && isFinite(ct)&&isFinite(hdl)) al.push('Triglicéridos ≥400 mg/dL: Friedewald no es válido. Solicita LDL medido.');
+    // Renal
+    const vfg=egfrOf(f), rac=g('rac');
+    if(isFinite(g('crea'))) row('Creatinina',fmt(g('crea'),2)+' mg/dL',['–','c-mut'],'Según laboratorio');
+    if(isFinite(vfg)) row('VFG estimada (CKD-EPI 2021)',fmt(vfg)+' mL/min/1,73 m²',vfg>=90?['G1 · normal o alta','c-ok']:vfg>=60?['G2 · levemente disminuida','c-ok']:vfg>=45?['G3a · leve a moderada','c-warn']:vfg>=30?['G3b · moderada a severa','c-bad']:vfg>=15?['G4 · severa','c-bad']:['G5 · falla renal','c-bad'],'≥60 (KDIGO)');
+    else if(isFinite(g('crea'))) row('VFG estimada','–',['Falta edad o sexo','c-mut'],'');
+    if(isFinite(g('bun'))) row('BUN',fmt(g('bun'))+' mg/dL',g('bun')>20?['Elevado','c-warn']:g('bun')<7?['Bajo','c-low']:['Normal','c-ok'],'7–20 mg/dL');
+    if(isFinite(rac)) row('Albuminuria (RAC)',fmt(rac)+' mg/g',rac<30?['A1 · normal a leve','c-ok']:rac<=300?['A2 · moderada','c-warn']:['A3 · severa','c-bad'],'<30 mg/g');
+    // Nutricional e inflamación
+    const alb=g('alb'), pre=g('preal'), pcr=g('pcr'), lin=g('linf');
+    if(isFinite(alb)) row('Albúmina',fmt(alb,1)+' g/dL',alb>=3.5?['Normal','c-ok']:alb>=2.8?['Depleción leve','c-warn']:alb>=2.1?['Depleción moderada','c-bad']:['Depleción severa','c-bad'],'≥3,5 g/dL');
+    if(isFinite(pre)) row('Prealbúmina',fmt(pre,1)+' mg/dL',pre>=15?['Normal','c-ok']:pre>=10?['Depleción leve','c-warn']:pre>=5?['Depleción moderada','c-bad']:['Depleción severa','c-bad'],'≥15 mg/dL');
+    if(isFinite(lin)) row('Linfocitos totales',fmt(lin)+' /mm³',lin>=2000?['Normal','c-ok']:lin>=1200?['Depleción leve','c-warn']:lin>=800?['Depleción moderada','c-bad']:['Depleción severa','c-bad'],'≥2.000 /mm³');
+    if(isFinite(pcr)) row('PCR',fmt(pcr,1)+' mg/L',pcr<=5?['Normal','c-ok']:pcr<=10?['Levemente elevada','c-warn']:['Inflamación','c-bad'],'≤5 mg/L (según laboratorio)');
+    if(isFinite(pcr)&&pcr>10&&(isFinite(alb)||isFinite(pre))) al.push('PCR >10 mg/L: albúmina y prealbúmina bajan por la inflamación (reactantes de fase aguda negativos). No las uses solas para diagnosticar desnutrición.');
+    // Electrolitos
+    const na=g('na'), kk=g('kk'), fo=g('fos'), mgv=g('mg');
+    if(isFinite(na)) row('Sodio',fmt(na)+' mEq/L',na<135?['Hiponatremia','c-bad']:na>145?['Hipernatremia','c-bad']:['Normal','c-ok'],'135–145');
+    if(isFinite(kk)) row('Potasio',fmt(kk,1)+' mEq/L',kk<3.5?['Hipokalemia','c-bad']:kk>5?['Hiperkalemia','c-bad']:['Normal','c-ok'],'3,5–5,0');
+    if(isFinite(fo)) row('Fósforo',fmt(fo,1)+' mg/dL',fo<2.5?['Hipofosfemia','c-bad']:fo>4.5?['Hiperfosfemia','c-warn']:['Normal','c-ok'],'2,5–4,5');
+    if(isFinite(mgv)) row('Magnesio',fmt(mgv,1)+' mg/dL',mgv<1.7?['Hipomagnesemia','c-bad']:mgv>2.2?['Hipermagnesemia','c-warn']:['Normal','c-ok'],'1,7–2,2');
+    if((isFinite(fo)&&fo<2.5)||(isFinite(kk)&&kk<3.5)||(isFinite(mgv)&&mgv<1.7)) al.push('Fósforo, potasio o magnesio bajos: riesgo de síndrome de realimentación. Corrige y monitoriza antes de progresar el aporte (ASPEN 2020).');
+    if(isFinite(kk)&&kk>5) al.push('Potasio >5,0 mEq/L: revisa el aporte de potasio de la pauta junto al equipo tratante.');
+    return {out,al,ldl,vfg,rac};
+  }
+  function rcvEval(){
+    const b=bioList(), pats=(window.APP&&APP.pats)?APP.pats():[];
+    const crit=[];
+    if($('ecv').value==='si') crit.push('ECV ateroesclerótica documentada');
+    if(pats.includes('dm2')) crit.push('Diabetes mellitus');
+    if((isFinite(b.vfg)&&b.vfg<45)||(isFinite(b.rac)&&b.rac>=30)) crit.push('ERC etapa 3b–5 o albuminuria ≥30 mg/g');
+    if($('htaR').value==='si') crit.push('HTA refractaria');
+    if(isFinite(b.ldl)&&b.ldl>190) crit.push('Dislipidemia severa (LDL >190 mg/dL)');
+    return {crit};
+  }
+
+  // Ecuaciones de riesgo CV a 10 años (verificadas contra la publicación original).
+  const PCE={F:{age:-29.799,age2:4.884,tc:13.54,agetc:-3.114,hdl:-13.578,agehdl:3.149,sbpT:2.019,sbpU:1.957,smk:7.574,agesmk:-1.665,dm:0.661,mean:-29.18,s0:0.9665},
+             M:{age:12.344,age2:0,tc:11.853,agetc:-2.664,hdl:-7.99,agehdl:1.769,sbpT:1.797,sbpU:1.764,smk:7.837,agesmk:-1.795,dm:0.658,mean:61.18,s0:0.9144}};
+  function pce(x){ const c=PCE[x.sex], la=Math.log(x.age), lt=Math.log(x.tc), lh=Math.log(x.hdl), ls=Math.log(x.sbp), sm=x.smk?1:0;
+    const sum=c.age*la+c.age2*la*la+c.tc*lt+c.agetc*la*lt+c.hdl*lh+c.agehdl*la*lh+(x.tx?c.sbpT:c.sbpU)*ls+c.smk*sm+c.agesmk*la*sm+c.dm*(x.dm?1:0);
+    return 100*(1-Math.pow(c.s0,Math.exp(sum-c.mean))); }
+  const FRS={F:{age:2.32888,tc:1.20904,hdl:-0.70833,sbpU:2.76157,sbpT:2.82263,smk:0.52873,dm:0.69154,mean:26.1931,s0:0.95012},
+             M:{age:3.06117,tc:1.1237,hdl:-0.93263,sbpU:1.93303,sbpT:1.99881,smk:0.65451,dm:0.57367,mean:23.9802,s0:0.88936}};
+  function frs(x){ const c=FRS[x.sex];
+    const sum=c.age*Math.log(x.age)+c.tc*Math.log(x.tc)+c.hdl*Math.log(x.hdl)+(x.tx?c.sbpT:c.sbpU)*Math.log(x.sbp)+(x.smk?c.smk:0)+(x.dm?c.dm:0);
+    return 100*(1-Math.pow(c.s0,Math.exp(sum-c.mean))); }
+  function rcvInputs(){
+    const g=k=>{ const x=parseFloat($(k).value); return isFinite(x)&&x>0?x:NaN; };
+    const pats=(window.APP&&APP.pats)?APP.pats():[];
+    const ah=$('antiHTA').value;
+    const x={sex:sexo==='F'?'F':'M',age:g('edad'),tc:g('ct'),hdl:g('hdl'),sbp:g('pas'),smk:$('tabaco').value==='si',dm:pats.includes('dm2'),tx:ah?ah==='si':pats.includes('hta'),txAuto:!ah,smkSet:!!$('tabaco').value};
+    const miss=[]; if(!isFinite(x.age)) miss.push('edad'); if(!isFinite(x.tc)) miss.push('colesterol total'); if(!isFinite(x.hdl)) miss.push('HDL'); if(!isFinite(x.sbp)) miss.push('PA sistólica');
+    x.miss=miss; return x;
+  }
+  const PCE_CAT=p=>p<5?['Bajo','c-ok']:p<7.5?['Limítrofe','c-warn']:p<20?['Intermedio','c-warn']:['Alto','c-bad'];
+  const FRS_CAT=p=>p<10?['Bajo','c-ok']:p<=20?['Intermedio','c-warn']:['Alto','c-bad'];
+  function rcvScores(){
+    const x=rcvInputs(); if(x.miss.length) return {x,list:[]};
+    const opt=Object.assign({},x,{tc:170,hdl:50,sbp:110,tx:false,smk:false,dm:false});
+    const list=[];
+    const inP=x.age>=40&&x.age<=79, inF=x.age>=30&&x.age<=74;
+    const xp=Object.assign({},x,{age:Math.min(79,Math.max(40,x.age))}), op=Object.assign({},opt,{age:xp.age});
+    const xf=Object.assign({},x,{age:Math.min(74,Math.max(30,x.age))}), of=Object.assign({},opt,{age:xf.age});
+    list.push({id:'pce',n:'Pooled Cohort Equations',s:'ACC/AHA 2013 · evento CV ateroesclerótico',v:pce(xp),o:pce(op),cat:PCE_CAT,cuts:[[0,5,'ok'],[5,7.5,'warn'],[7.5,20,'warn'],[20,40,'bad']],ticks:[5,7.5,20],max:40,inR:inP,rg:'40–79 años'});
+    list.push({id:'frs',n:'Framingham general 2008',s:"D'Agostino · enfermedad CV global",v:frs(xf),o:frs(of),cat:FRS_CAT,cuts:[[0,10,'ok'],[10,20,'warn'],[20,40,'bad']],ticks:[10,20],max:40,inR:inF,rg:'30–74 años'});
+    return {x,list};
+  }
+  function rcvCard(r){
+    const pos=v=>Math.min(100,v/r.max*100), c=r.cat(r.v);
+    return `<div class="rcvc"><span class="k">${r.n}</span><span class="v">${fmt(r.v,1)}<small> % a 10 años</small></span>
+      <span class="chip ${c[1]}">${c[0]}</span>${r.inR?'':` <span class="chip c-warn">Fuera de rango · ${r.rg} (se usa el extremo)</span>`}
+      <div class="rcvsc"><div class="rcvbar">${r.cuts.map(([a,b,col])=>`<span style="width:${pos(b)-pos(a)}%;background:var(--${col})"></span>`).join('')}</div><i style="left:${pos(r.v)}%"></i><i class="opt" style="left:${pos(r.o)}%" title="Factores óptimos"></i></div>
+      <div class="rcvtk">${r.ticks.map(t=>`<span style="left:${pos(t)}%">${fmt(t,t%1?1:0)}</span>`).join('')}<span style="left:97%">${r.max}+</span></div>
+      <span class="sub">${r.s} · con factores óptimos: ${fmt(r.o,1)} %</span></div>`;
+  }
+  function rcvModTable(x){
+    if(x.miss.length) return '';
+    const base=pce(Object.assign({},x,{age:Math.min(79,Math.max(40,x.age))}));
+    const mk=(lab,ch)=>{ const y=Object.assign({},x,ch,{age:Math.min(79,Math.max(40,x.age))}); return {lab,v:pce(y)}; };
+    const rows=[];
+    if(x.smk) rows.push(mk('Dejar de fumar',{smk:false}));
+    if(x.sbp>130) rows.push(mk('PA sistólica a 130 mmHg',{sbp:130}));
+    if(x.tc>200) rows.push(mk('Colesterol total a 200 mg/dL',{tc:200}));
+    if(x.hdl<(x.sex==='F'?50:40)) rows.push(mk('HDL a '+(x.sex==='F'?50:40)+' mg/dL',{hdl:x.sex==='F'?50:40}));
+    if(rows.length>1) rows.push(mk('Todo lo anterior',Object.assign({},...[x.smk?{smk:false}:{},x.sbp>130?{sbp:130}:{},x.tc>200?{tc:200}:{},x.hdl<(x.sex==='F'?50:40)?{hdl:x.sex==='F'?50:40}:{}])));
+    if(!rows.length) return '';
+    return `<h3 style="font:700 1rem var(--f-display);margin:14px 0 6px">Impacto de modificar factores (Pooled Cohort Equations)</h3><div class="tbl-wrap"><table class="rcvmod"><thead><tr><th>Escenario</th><th class="num">Riesgo</th><th class="num">Cambio</th></tr></thead><tbody>
+      <tr><td>Actual</td><td class="num"><b>${fmt(base,1)} %</b></td><td class="num">–</td></tr>`+rows.map(r=>`<tr><td>${r.lab}</td><td class="num">${fmt(r.v,1)} %</td><td class="num c-ok">${fmt(r.v-base,1)} pts</td></tr>`).join('')+'</tbody></table></div>';
+  }
+  function bio(){
+    const b=bioList();
+    $('bioAlerts').innerHTML=b.al.map(a=>`<div class="warnbox" style="margin-bottom:8px">${a}</div>`).join('');
+    $('bioBody').innerHTML=b.out.length?b.out.map(r=>`<tr><td>${r.n}</td><td class="num">${r.v}</td><td><span class="chip ${r.c[1]}">${r.c[0]}</span></td><td><small>${r.r}</small></td></tr>`).join('')
+      :'<tr><td colspan="4" class="c-mut">Sin exámenes. Ingrésalos en «Exámenes bioquímicos» dentro de Datos del paciente.</td></tr>';
+    const r=rcvEval(), sc=rcvScores(), x=sc.x;
+    let head;
+    if(r.crit.length) head=`<div class="rcvbox" style="border-color:var(--bad)"><span class="chip c-bad">ALTO</span><b>Alto riesgo cardiovascular</b><ul>${r.crit.map(c=>`<li>${c}</li>`).join('')}</ul><small class="c-mut">Criterio directo MINSAL 2014: prevalece sobre el resultado de las ecuaciones.</small></div>`;
+    else if(sc.list.length){ const c=PCE_CAT(sc.list[0].v); head=`<div class="rcvbox"><span class="chip ${c[1]}">${c[0].toUpperCase()}</span><b>Sin criterio directo · riesgo por ecuación</b><small class="c-mut" style="width:100%">Clasificación según Pooled Cohort Equations; Framingham 2008 como contraste.</small></div>`; }
+    else head=`<div class="rcvbox"><span class="chip c-mut">Faltan datos</span><b>Riesgo por ecuación</b><small class="c-mut" style="width:100%">Ingresa ${x.miss.join(', ')} para calcular el riesgo a 10 años.</small></div>`;
+    const notes=[];
+    if(sc.list.length){
+      if(x.txAuto) notes.push('Tratamiento antihipertensivo asumido '+(x.tx?'«sí» por HTA en la ficha':'«no»')+'. Corrígelo en Riesgo cardiovascular si no corresponde.');
+      if(!x.smkSet) notes.push('Tabaquismo sin dato: se calculó como no fumador.');
+      if($('ecv').value==='si') notes.push('Con ECV ateroesclerótica establecida estas ecuaciones no aplican (son de prevención primaria).');
+    }
+    $('rcvBox').innerHTML = head + (sc.list.length?`<div class="rcvcards">${sc.list.map(rcvCard).join('')}</div>`:'')
+      + notes.map(n=>`<div class="warnbox" style="margin-bottom:8px">${n}</div>`).join('') + rcvModTable(x);
+  }
+  const bioTxt=()=>{ const b=bioList(), r=rcvEval(); const l=b.out.map(x=>`${x.n}: ${x.v} (${x.c[0]})`); if(r.crit.length) l.push('Riesgo CV: ALTO por criterio directo ('+r.crit.join('; ')+')'); rcvScores().list.forEach(q=>l.push(`Riesgo CV ${q.n}: ${fmt(q.v,1)} % a 10 años (${q.cat(q.v)[0]})`)); return l.join('\n'); };
+
+
+  // ---------- Parámetros adicionales (lista libre) ----------
+  function xGet(){ try{ const a=JSON.parse($('extra').value||'[]'); return Array.isArray(a)?a:[]; }catch(e){ return []; } }
+  function xSet(a,silent){ $('extra').value=a.length?JSON.stringify(a):''; xRender(); if(!silent) $('f').dispatchEvent(new Event('input')); }
+  function xEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function xRender(){
+    const a=xGet();
+    if(!$('xList').contains(document.activeElement)) $('xList').innerHTML=a.map((r,i)=>`<div class="xrow" data-i="${i}"><input type="text" data-k="n" value="${xEsc(r.n)}" maxlength="60" aria-label="Parámetro"><input type="text" data-k="v" value="${xEsc(r.v)}" maxlength="40" aria-label="Valor"><input type="text" data-k="u" value="${xEsc(r.u)}" maxlength="20" list="xUnits" aria-label="Unidad"><button type="button" data-xdel="${i}" aria-label="Quitar ${xEsc(r.n)}">×</button></div>`).join('');
+    $('xPanel').hidden=!a.length;
+    $('xBody').innerHTML=a.map(r=>`<tr><td>${xEsc(r.n)}</td><td class="num">${xEsc(r.v)}</td><td>${xEsc(r.u)}</td></tr>`).join('');
+  }
+  $('xAddBtn').addEventListener('click',()=>{
+    const n=$('xName').value.trim(), v=$('xVal').value.trim(), u=$('xUnit').value.trim();
+    if(!n){ $('xName').focus(); return; }
+    const a=xGet(); a.push({n,v,u}); xSet(a);
+    $('xName').value=''; $('xVal').value=''; $('xUnit').value=''; $('xName').focus();
+  });
+  ['xName','xVal','xUnit'].forEach(id=>$(id).addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); $('xAddBtn').click(); } }));
+  $('xList').addEventListener('input',e=>{
+    e.stopPropagation();
+    const row=e.target.closest('.xrow'); if(!row) return;
+    const a=xGet(), i=+row.dataset.i; if(!a[i]) return;
+    a[i][e.target.dataset.k]=e.target.value; $('extra').value=JSON.stringify(a);
+    $('xBody').innerHTML=a.map(r=>`<tr><td>${xEsc(r.n)}</td><td class="num">${xEsc(r.v)}</td><td>${xEsc(r.u)}</td></tr>`).join('');
+    clearTimeout(xRender.t); xRender.t=setTimeout(()=>$('f').dispatchEvent(new Event('input')),500);
+  });
+  $('xList').addEventListener('click',e=>{ const b=e.target.closest('[data-xdel]'); if(!b) return; const a=xGet(); a.splice(+b.dataset.xdel,1); xSet(a); });
+  const xTxt=()=>xGet().filter(r=>r.n).map(r=>`${r.n}: ${r.v}${r.u?' '+r.u:''}`).join('\n');
+
   function load(d){
+    d=Object.assign({},VIT0,BIO0,{kcalkg:25,vctMan:'',extra:'',choMode:'resto',choVal:''},d);
     for(const k in d){ if(k!=='sexo' && $(k)) $(k).value=d[k]; }
-    setSexo(d.sexo||'M'); calc();
+    setSexo(d.sexo||'M'); xRender(); calc(); vitals(); bio();
   }
 
   $('copy').addEventListener('click',()=>{
@@ -1418,14 +1875,21 @@ Agua: ${fmt(agua*pc)} ml/día`;
   });
 
   // Interfaz que usa la capa de pacientes
-  const FIELDS=['edad','peso','talla','cintura','imcObj','pesoCalc','fa','feSel','fe','prot','lip','agua','eqSel'];
+  const FIELDS=['edad','peso','talla','cintura','pas','pad','fc','glic','glicMom','hba1c','ct','hdl','ldl','tg','crea','bun','rac','alb','preal','pcr','linf','na','kk','fos','mg','ecv','htaR','tabaco','antiHTA','kcalkg','vctMan','extra','choMode','choVal','imcObj','pesoCalc','fa','feSel','fe','prot','lip','agua','eqSel'];
   window.EVAL={
     get(){ const o={}; FIELDS.forEach(k=>{ o[k]=$(k).value; }); o.sexo=sexo; return o; },
     set(d){ load(d); },
     setField(k,v){ if(!$(k)) return; $(k).value=v; if(k==='fe'){ $('fe').dispatchEvent(new Event('input')); } calc(); },
     sexo:()=>sexo,
     last:()=>LAST,
-    blank:{edad:'',peso:'',talla:'',cintura:'',imcObj:22,pesoCalc:'auto',fa:'1.2',feSel:'1.0',fe:1.0,prot:1.0,lip:30,agua:30,eqSel:'mifflin',sexo:'M'}
+    vit:()=>vitList().out,
+    extra:()=>xGet().filter(r=>r.n),
+    bio:()=>bioList().out,
+    rcv:()=>rcvEval().crit,
+    rcvScores:()=>rcvScores().list.map(q=>({n:q.n,v:q.v,c:q.cat(q.v)[0]})),
+    _pce:pce,_frs:frs,
+    egfr:egfrOf,
+    blank:{edad:'',peso:'',talla:'',cintura:'',ct:'',hdl:'',ldl:'',tg:'',crea:'',bun:'',rac:'',alb:'',preal:'',pcr:'',linf:'',na:'',kk:'',fos:'',mg:'',ecv:'',htaR:'',tabaco:'',antiHTA:'',kcalkg:25,vctMan:'',extra:'',choMode:'resto',choVal:'',pas:'',pad:'',fc:'',glic:'',glicMom:'hosp',hba1c:'',imcObj:22,pesoCalc:'auto',fa:'1.2',feSel:'1.0',fe:1.0,prot:1.0,lip:30,agua:30,eqSel:'mifflin',sexo:'M'}
   };
 
   load(window.EVAL.blank);
@@ -1433,7 +1897,7 @@ Agua: ${fmt(agua*pc)} ml/día`;
 </script>
 
 <script>
-/* Capa de consulta: pacientes, controles, pautas y PDF. Los datos viven en el espacio privado del usuario. */
+/* Capa de consulta: pacientes, controles, pautas y PDF. Los datos viven solo en este teléfono (IndexedDB). */
 (function(){
   const $ = id => document.getElementById(id);
   const fmt = (n,d=0) => isFinite(n) ? n.toLocaleString('es-CL',{minimumFractionDigits:d,maximumFractionDigits:d}) : '–';
@@ -1497,7 +1961,8 @@ Agua: ${fmt(agua*pc)} ml/día`;
   const TABS=['pac','eval','plan','pred','tpl'], HASH={pacientes:'pac',evaluacion:'eval',plan:'plan',predictivas:'pred',pautas:'tpl'};
   let curTab='pac';
   function gate(){
-    const need=!cur && (curTab==='eval'||curTab==='plan');
+    const need=false;
+    if($('scratchBar')) $('scratchBar').hidden = !!cur || !(curTab==='eval'||curTab==='plan');
     TABS.forEach(k=>{ $('view-'+k).hidden = k!==curTab || (need && k===curTab); });
     $('gate').hidden=!need;
   }
@@ -1510,6 +1975,16 @@ Agua: ${fmt(agua*pc)} ml/día`;
     window.scrollTo(0,0);
   }
   $('gatePac').addEventListener('click',()=>showTab('pac'));
+  let carry=null;
+  $('scratchOpen').addEventListener('click',()=>showTab('pac'));
+  $('scratchSave').addEventListener('click',()=>{
+    carry=gather(); const f=carry.form||{};
+    showTab('pac'); $('newPatForm').hidden=false;
+    $('npEdad').value=f.edad||''; $('npPeso').value=f.peso||''; $('npTalla').value=f.talla||'';
+    setNpSexo(f.sexo==='F'?'F':'M');
+    if(f.fa) $('npFa').value=f.fa; if(f.fe) { const o=[...$('npFe').options].find(o=>parseFloat(o.value)===parseFloat(f.fe)); if(o) $('npFe').value=o.value; }
+    $('npName').focus(); toast('Escribe el nombre: la ficha se crea con todos los datos de la evaluación.');
+  });
   $('gateNew').addEventListener('click',()=>{ showTab('pac'); $('newPatForm').hidden=false; $('npName').focus(); });
   TABS.forEach(k=>$('tab-'+k).addEventListener('click',()=>showTab(k)));
   let start=HASH[location.hash.slice(1)]||null;
@@ -1517,10 +1992,10 @@ Agua: ${fmt(agua*pc)} ml/día`;
   showTab(TABS.includes(start)?start:'pac');
 
   // ---------- Estado de trabajo ----------
-  const gather = () => ({form:EVAL.get(), plan:PLAN.get()});
+  const gather = () => ({form:EVAL.get(), plan:PLAN.get(), pred:window.PRED?PRED.get():undefined});
   function applyState(st){
     applying=true;
-    try{ PLAN.set(st && st.plan || null); EVAL.set(st && st.form || EVAL.blank); }
+    try{ PLAN.set(st && st.plan || null); EVAL.set(st && st.form || EVAL.blank); if(window.PRED) PRED.set(st && st.pred || null); }
     finally{ applying=false; }
   }
   const curPatient = () => cur ? patients.find(p=>p.id===cur) : null;
@@ -1540,6 +2015,7 @@ Agua: ${fmt(agua*pc)} ml/día`;
     return write(id,()=>col.doc(id).update({st,updatedAt:iso()})).then(()=>{ if(cur===id) setStatus('Guardado '+hhmm()); },e=>{ lastJson=''; setStatus('Sin guardar'); werr(e); });
   }
   window.addEventListener('plandirty',scheduleSave);
+  window.addEventListener('preddirty',scheduleSave);
   window.addEventListener('req',scheduleSave);
   document.addEventListener('visibilitychange',()=>{ if(document.hidden) flush(); });
 
@@ -1567,7 +2043,8 @@ Agua: ${fmt(agua*pc)} ml/día`;
     const id=newId('p'), at=iso();
     const form=Object.assign({},EVAL.blank,{sexo:d.sexo,edad:d.edad,peso:d.peso,talla:d.talla,fa:d.fa,feSel:d.fe,fe:d.fe});
     if(d.pat.includes('obe')) form.pesoCalc='auto';
-    const st=JSON.stringify({form,plan:null});
+    let st=JSON.stringify({form,plan:null});
+    if(carry){ const c=carry; carry=null; c.form=Object.assign({},c.form||{},{sexo:d.sexo,edad:d.edad,peso:d.peso,talla:d.talla,fa:d.fa,feSel:d.fe,fe:d.fe}); st=JSON.stringify(c); }
     const doc={t:'p',name:d.name,rid:d.rid,dx:d.dx,bed:d.bed,phone:'',notes:'',pat:d.pat,patOtra:d.patOtra,createdAt:at,updatedAt:at,last:null,st};
     patients.unshift(Object.assign({id},doc));
     write(id,()=>col.doc(id).set(doc)).catch(werr);
@@ -1604,6 +2081,7 @@ Agua: ${fmt(agua*pc)} ml/día`;
   $('npPat').innerHTML=patChecks('np',[]);
   $('npFa').value='1.2';
   $('newPatBtn').addEventListener('click',()=>{ const f=$('newPatForm'); f.hidden=!f.hidden; if(!f.hidden) $('npName').focus(); });
+  $('npCancel').addEventListener('click',()=>{ carry=null; });
   $('npCancel').addEventListener('click',()=>{ $('newPatForm').hidden=true; });
   $('newPatForm').addEventListener('submit',e=>{
     e.preventDefault();
@@ -1700,13 +2178,13 @@ Agua: ${fmt(agua*pc)} ml/día`;
   function renderPatients(){
     const q=norm($('patSearch').value.trim());
     const list=patients.filter(p=>!q||norm(p.name+' '+(p.rid||'')).includes(q));
-    if(!col && !loaded){ $('patList').innerHTML='<div class="empty"><b>Sin almacenamiento</b>No se pueden mostrar pacientes en este visor.</div>'; return; }
+    if(!col && !loaded){ $('patList').innerHTML='<div class="empty"><b>Sin almacenamiento</b>No se pueden mostrar pacientes en este navegador.</div>'; return; }
     if(!loaded){ $('patList').innerHTML='<div class="empty">Cargando pacientes…</div>'; return; }
     if(!patients.length){ $('patList').innerHTML='<div class="empty"><b>Todavía no tienes pacientes</b>Presiona «Nuevo paciente» para crear la primera ficha.</div>'; return; }
     if(!list.length){ $('patList').innerHTML='<div class="empty">Ningún paciente coincide con la búsqueda.</div>'; return; }
     $('patList').innerHTML=list.map(p=>`<button type="button" class="pcard" data-open="${esc(p.id)}" aria-current="${p.id===cur}">
       <span class="av">${esc(initials(p.name))}</span>
-      <span class="pi"><b>${esc(p.name)}</b><small>${esc([p.bed,p.dx||p.rid||'Sin motivo registrado'].filter(Boolean).join(' · '))}${p.last?' · '+esc(fdate(p.last.at)):''}</small>${patLabels(p).length?`<span class="pchips">${patLabels(p).map(x=>`<span>${esc(x)}</span>`).join('')}</span>`:''}</span>
+      <span class="pi"><b>${esc(p.name)}</b><small>${esc([p.bed,p.dx||p.rid||'Sin motivo registrado'].filter(Boolean).join(' · '))}${p.last?' · '+esc(fdate(p.last.at)):''}${p.last&&p.last.vct?' · VCT '+esc(fmt(p.last.vct))+' kcal':''}</small>${patLabels(p).length?`<span class="pchips">${patLabels(p).map(x=>`<span>${esc(x)}</span>`).join('')}</span>`:''}</span>
       ${p.last?`<span class="pill ${clsClass(p.last.cls)}">${esc(fmt(p.last.peso,1))} kg</span>`:''}
     </button>`).join('');
   }
@@ -1715,7 +2193,14 @@ Agua: ${fmt(agua*pc)} ml/día`;
   const SERIES={
     peso:{name:'peso',unit:'kg',val:v=>v.peso},
     imc:{name:'IMC',unit:'kg/m²',val:v=>v.imc},
-    cin:{name:'cintura',unit:'cm',val:v=>parseFloat(formOf(v).cintura)}
+    cin:{name:'cintura',unit:'cm',val:v=>parseFloat(formOf(v).cintura)},
+    pas:{name:'PA sistólica',unit:'mmHg',val:v=>parseFloat(formOf(v).pas),ref:{v:140,label:'meta <140 mmHg'}},
+    pad:{name:'PA diastólica',unit:'mmHg',val:v=>parseFloat(formOf(v).pad),ref:{v:90,label:'meta <90 mmHg'}},
+    glic:{name:'glicemia',unit:'mg/dL',val:v=>parseFloat(formOf(v).glic),band:[70,180],bl:'70–180 mg/dL'},
+    hba1c:{name:'HbA1c',unit:'%',val:v=>parseFloat(formOf(v).hba1c),ref:{v:7,label:'meta general <7 %'}},
+    ldl:{name:'LDL',unit:'mg/dL',val:v=>{ const f=formOf(v); let l=parseFloat(f.ldl); if(!(l>0)){ const c=parseFloat(f.ct),h=parseFloat(f.hdl),t=parseFloat(f.tg); l=(c>0&&h>0&&t>0&&t<400)?c-h-t/5:NaN; } return l; },ref:{v:100,label:'óptimo <100 mg/dL'}},
+    vfg:{name:'VFG',unit:'mL/min',val:v=>EVAL.egfr(formOf(v)),ref:{v:60,label:'60 mL/min/1,73 m²'}},
+    alb:{name:'albúmina',unit:'g/dL',val:v=>parseFloat(formOf(v).alb),ref:{v:3.5,label:'3,5 g/dL'}}
   };
   function chart(all,key){
     const S=SERIES[key], vs=all.filter(v=>isFinite(S.val(v)));
@@ -1724,6 +2209,8 @@ Agua: ${fmt(agua*pc)} ml/día`;
     let band=null, ref=null;
     if(key==='imc') band=am?[23,27.9]:[18.5,24.9];
     if(key==='cin') ref={v:male?90:80,label:'corte IDF/ALAD '+(male?90:80)+' cm'};
+    if(S.ref) ref=S.ref;
+    if(S.band) band=S.band;
     const W=420,H=176,pl=40,pr=16,pt=18,pb=30;
     const xs=vs.map(v=>+new Date(v.at)), ys=vs.map(S.val);
     let y0=Math.min(...ys,...(band||[]),...(ref?[ref.v]:[])), y1=Math.max(...ys,...(band||[]),...(ref?[ref.v]:[])); if(y1-y0<1){ y0-=1; y1+=1; }
@@ -1733,7 +2220,7 @@ Agua: ${fmt(agua*pc)} ml/día`;
     const pts=vs.map((v,i)=>[X(xs[i]),Y(ys[i])]);
     const ticks=[y0+pad,(y0+y1)/2,y1-pad];
     let s=`<svg class="wchart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Evolución de ${S.name} en ${S.unit}">`;
-    if(band) s+=`<rect class="wband" x="${pl}" y="${Y(band[1]).toFixed(1)}" width="${W-pl-pr}" height="${(Y(band[0])-Y(band[1])).toFixed(1)}"/><text class="wtxt" x="${W-pr-2}" y="${(Y(band[1])+10).toFixed(1)}" text-anchor="end">rango normal ${fmt(band[0],1)}–${fmt(band[1],1)}</text>`;
+    if(band) s+=`<rect class="wband" x="${pl}" y="${Y(band[1]).toFixed(1)}" width="${W-pl-pr}" height="${(Y(band[0])-Y(band[1])).toFixed(1)}"/><text class="wtxt" x="${W-pr-2}" y="${(Y(band[1])+10).toFixed(1)}" text-anchor="end">${S.bl||('rango normal '+fmt(band[0],1)+'–'+fmt(band[1],1))}</text>`;
     ticks.forEach(t=>{ s+=`<line class="axis" x1="${pl}" x2="${W-pr}" y1="${Y(t)}" y2="${Y(t)}"/><text class="wtxt" x="${pl-6}" y="${Y(t)+3}" text-anchor="end">${fmt(t,1)}</text>`; });
     if(ref) s+=`<line class="wref" x1="${pl}" x2="${W-pr}" y1="${Y(ref.v).toFixed(1)}" y2="${Y(ref.v).toFixed(1)}"/><text class="wtxt wreft" x="${W-pr-2}" y="${(Y(ref.v)-4).toFixed(1)}" text-anchor="end">${ref.label}</text>`;
     s+=`<polyline class="wline" points="${pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}"/>`;
@@ -1763,7 +2250,7 @@ Agua: ${fmt(agua*pc)} ml/día`;
   }
   function renderTpls(){
     clearArmed('t:');
-    if(!col && !loaded){ $('tplList').innerHTML='<div class="empty"><b>Sin almacenamiento</b>No se pueden mostrar pautas en este visor.</div>'; return; }
+    if(!col && !loaded){ $('tplList').innerHTML='<div class="empty"><b>Sin almacenamiento</b>No se pueden mostrar pautas en este navegador.</div>'; return; }
     if(!tpls.length){ $('tplList').innerHTML='<div class="empty" style="grid-column:1/-1"><b>Aún no tienes pautas guardadas</b>Arma un plan en la pestaña Plan y guárdalo aquí para reutilizarlo.</div>'; return; }
     $('tplList').innerHTML=tpls.map(t=>`<div class="tplcard">
       <input class="tplname" type="text" maxlength="80" value="${esc(t.name)}" data-tid="${esc(t.id)}" aria-label="Nombre de la pauta">
@@ -1800,6 +2287,7 @@ Agua: ${fmt(agua*pc)} ml/día`;
   window.addEventListener('req',()=>renderSug());
   window.APP={
     hasPatient:()=>!!cur,
+    pats:()=>{ const p=curPatient(); return p?(p.pat||[]):[]; },
     form:()=>EVAL.get(),
     apply(field,value,label){
       if(!cur){ toast('Abre un paciente para guardar el valor en su ficha.'); return false; }
@@ -1851,7 +2339,7 @@ Agua: ${fmt(agua*pc)} ml/día`;
   async function savePdf(doc,name){
     try{
       const dl=window.claude && await window.claude.use('downloads');
-      if(!dl){ toast('La descarga de archivos no está disponible en este visor.'); return; }
+      if(!dl){ toast('La descarga de archivos no está disponible en este navegador.'); return; }
       await dl.save({filename:name,data:doc.output('arraybuffer')});
       toast('PDF guardado.');
     }catch(e){ if(!e || e.code!=='declined') toast('No se pudo guardar el PDF.'); }
@@ -1863,15 +2351,25 @@ Agua: ${fmt(agua*pc)} ml/día`;
     const pp=curPatient(), pn=pp?patNames(pp):[];
     const a=[['Sexo y edad',`${L.M?'Hombre':'Mujer'} | ${fmt(L.edad)} años`],...(pn.length?[['Patologías crónicas',pn.join(', ')]]:[]),['Peso actual | talla',`${fmt(L.peso,1)} kg | ${fmt(L.talla,1)} cm`],['IMC',`${fmt(L.imc,1)} kg/m2 | ${L.cls} (${L.am?'MINSAL, adulto mayor':'OMS'})`]];
     if(isFinite(L.cin)) a.push(['Perímetro de cintura',`${fmt(L.cin,1)} cm | ${L.cinTxt}`]);
-    a.push([`Peso ideal (IMC ${fmt(L.imcObj,1)})`,`${fmt(L.pi,1)} kg | ${fmt(L.pct,0)} % del peso ideal`],['Peso ajustado',`${fmt(L.pa,1)} kg`],['Rango de peso normal',`${fmt(L.lo,1)} - ${fmt(L.hi,1)} kg`]);
+    a.push([`Peso ideal (IMC ${fmt(L.imcObj,1)})`,`${fmt(L.pi,1)} kg | ${fmt(L.pct,0)} % del peso ideal`],['Peso ajustado',`${fmt(L.pa,1)} kg`],[`Peso máximo aceptable (IMC ${L.imcMax})`,`${fmt(L.pma,1)} kg`],['Rango de peso normal',`${fmt(L.lo,1)} - ${fmt(L.hi,1)} kg`]);
     y=tbl(doc,y,[['Antropometría','']],a,{columnStyles:{0:{cellWidth:62,fontStyle:'bold'}}});
+    const vt=EVAL.vit();
+    if(vt.length) y=tbl(doc,y+8,[['Signos vitales y glicemia','']],vt.map(r=>[r.n,`${r.v} | ${r.c[0]}`]),{columnStyles:{0:{cellWidth:62,fontStyle:'bold'}}});
+    const xt=EVAL.extra();
+    if(xt.length) y=tbl(doc,y+8,[['Parámetros adicionales','']],xt.map(r=>[r.n,`${r.v}${r.u?' '+r.u:''}`]),{columnStyles:{0:{cellWidth:62,fontStyle:'bold'}}});
+    const bt=EVAL.bio(), rc=EVAL.rcv();
+    if(bt.length) y=tbl(doc,y+8,[['Exámenes bioquímicos','']],bt.map(r=>[r.n,`${r.v} | ${r.c[0]}`]),{columnStyles:{0:{cellWidth:62,fontStyle:'bold'}}});
+    const rs=EVAL.rcvScores(), rrows=[];
+    if(rc.length) rrows.push(['Clasificación','ALTO (criterio directo MINSAL 2014)'],['Criterios',rc.join('; ')]);
+    rs.forEach(q=>rrows.push([q.n,`${fmt(q.v,1)} % a 10 años | ${q.c}`]));
+    if(rrows.length) y=tbl(doc,y+8,[['Riesgo cardiovascular','']],rrows,{columnStyles:{0:{cellWidth:62,fontStyle:'bold'}}});
     const r=[['Peso de cálculo',`${fmt(L.pc,1)} kg (${L.pcLabel})`],['Gasto energético basal',`${fmt(L.geb)} kcal (${L.eqName})`],['Factores',`Actividad ${String(L.fa).replace('.',',')} | Estrés metabólico ${String(L.fe).replace('.',',')}`],
       ['Valor calórico total',`${fmt(L.get)} kcal/día (${fmt(L.get/L.pc,1)} kcal/kg)`],['Proteínas',`${fmt(L.pG)} g/día (${fmt(L.prot,1)} g/kg | ${fmt(L.pP,0)} % del VCT)`],
       ['Lípidos',`${fmt(L.lG)} g/día (${fmt(L.lip,0)} % del VCT)`],['Carbohidratos',`${fmt(L.cG)} g/día (${fmt(L.cP,0)} % del VCT)`],['Agua',`${fmt(L.aguaMl)} ml/día (${fmt(L.agua)} ml/kg)`]];
     y=tbl(doc,y+8,[['Requerimientos','']],r,{columnStyles:{0:{cellWidth:62,fontStyle:'bold'}}});
     const p=curPatient();
-    if(p && p.notes){ doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(20,35,31); doc.text('Notas clínicas',14,y+10); doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.text(doc.splitTextToSize(clean(p.notes),182),14,y+16); }
-    pdfEnd(doc,'Referencias: OMS, MINSAL, FAO/OMS/UNU, Harris-Benedict, Mifflin-St Jeor.');
+    if(p && p.notes){ y=tbl(doc,y+8,[['Notas clínicas']],[[clean(p.notes)]],{theme:'plain',styles:{fontSize:9.5,cellPadding:2.2,textColor:[20,35,31],font:'helvetica'}}); }
+    pdfEnd(doc,'Referencias: OMS, MINSAL, FAO/OMS/UNU, Harris-Benedict, Mifflin-St Jeor'+(EVAL.vit().length?', GES HTA MINSAL 2010, ADA 2024':'')+(EVAL.bio().length?', NCEP ATP III, CKD-EPI 2021, KDIGO, ASPEN':'')+(EVAL.rcvScores().length?', ACC/AHA 2013-2019 (PCE), Framingham 2008':'')+'.');
     savePdf(doc,pdfName('Informe'));
   }
   function pdfPlan(){
@@ -1936,7 +2434,7 @@ Agua: ${fmt(agua*pc)} ml/día`;
   const fmt = (n,d=0) => isFinite(n) ? n.toLocaleString('es-CL',{minimumFractionDigits:d,maximumFractionDigits:d}) : '–';
   let sx='M', selT=null, selP=null;
   const v = id => { const x=parseFloat($(id).value); return isFinite(x)&&x>0 ? x : NaN; };
-  const NAMES={E:'edad',AR:'altura de rodilla',SE:'media envergadura',CB:'circunferencia de brazo',CP:'pantorrilla',CA:'circunferencia abdominal',PSE:'pliegue subescapular',PT:'pliegue tricipital'};
+  const NAMES={E:'edad',AR:'altura de rodilla',SE:'media envergadura',CB:'circunferencia de brazo',CP:'pantorrilla',CA:'circunferencia abdominal',PSE:'pliegue subescapular',PT:'pliegue tricipital',PB:'pliegue bicipital'};
 
   // Cada ecuación: id, nombre, rango de edad recomendado, variables, función (m = hombre).
   const TALLA=[
@@ -1959,17 +2457,27 @@ Agua: ${fmt(agua*pc)} ml/día`;
     {id:'rp1',n:'Rabito 2006 · CB, CA, CP y PSE',sub:'Adultos y adultos mayores hospitalizados',age:[18,110],need:['CB','CA','CP','PSE'],
       f:(d,m)=> 0.5030*d.CB + 0.5634*d.CA + 1.318*d.CP + 0.0339*d.PSE - 43.156},
     {id:'rp2',n:'Rabito 2006 · CB, CA y CP',sub:'Adultos y adultos mayores hospitalizados',age:[18,110],need:['CB','CA','CP'],
-      f:(d,m)=> 0.4808*d.CB + 0.5646*d.CA + 1.316*d.CP - 42.245}
+      f:(d,m)=> 0.4808*d.CB + 0.5646*d.CA + 1.316*d.CP - 42.245},
+    {id:'chk60',n:'Chumlea · AR y CB (60–80 años)',sub:'Sin CA ni PSE · ecuación para población blanca de EE.UU.',age:[60,80],need:['AR','CB'],
+      f:(d,m)=> m ? 1.10*d.AR + 3.07*d.CB - 75.81 : 1.09*d.AR + 2.68*d.CB - 65.51},
+    {id:'chk19',n:'Chumlea · AR y CB (19–59 años)',sub:'Sin CA ni PSE · ecuación para población blanca de EE.UU.',age:[19,59],need:['AR','CB'],
+      f:(d,m)=> m ? 1.19*d.AR + 3.21*d.CB - 86.82 : 1.01*d.AR + 2.81*d.CB - 66.04}
   ];
 
-  // Frisancho 1981 · percentiles P5, P10, P25, P50, P75, P90, P95 (mm²) por grupo de edad.
+  // Frisancho 1981 (Am J Clin Nutr 34:2540) · percentiles P5, P10, P25, P50, P75, P90, P95 por grupo de edad.
+  // pt en mm; cb y cmb en mm (tablas 1 y 2); ama y afa en mm² (tabla 3).
   const AGES=[[18,19],[19,25],[25,35],[35,45],[45,55],[55,65],[65,75]];
   const PCT=[5,10,25,50,75,90,95];
   const FR={
     M:{ama:[[4070,4481,5066,5552,6374,7067,8355],[4508,4777,5274,5913,6660,7606,8200],[4694,4963,5541,6214,7067,7847,8436],[4844,5181,5740,6490,7265,8034,8488],[4546,4946,5589,6297,7142,7918,8458],[4422,4783,5381,6144,6919,7670,8149],[3973,4411,5031,5716,6432,7074,7453]],
+       pt:[[4,5,6,9,13,20,24],[4,5,7,10,15,20,22],[5,6,8,12,16,20,24],[5,6,8,12,16,20,23],[6,6,8,12,15,20,25],[5,6,8,11,14,19,22],[4,6,8,11,15,19,22]],
+       cb:[[245,260,276,297,321,353,379],[262,272,288,308,331,355,372],[271,282,300,319,342,362,375],[278,287,305,326,345,363,374],[267,281,301,322,342,362,376],[258,273,296,317,336,355,369],[248,263,285,307,325,344,355]],
+       cmb:[[226,237,252,264,283,298,324],[238,245,257,273,289,309,321],[243,250,264,279,298,314,326],[247,255,269,286,302,318,327],[239,249,265,281,300,315,326],[236,245,260,278,295,310,320],[223,235,251,268,284,298,306]],
        afa:[[560,665,860,1264,1947,3302,3928],[594,743,963,1406,2231,3098,3652],[675,831,1174,1752,2459,3246,3786],[703,851,1310,1792,2463,3098,3624],[749,922,1254,1741,2359,3245,3928],[658,839,1116,1645,2236,2976,3466],[573,753,1122,1621,2199,2876,3327]]},
     F:{ama:[[2398,2538,2917,3243,3694,4461,4767],[2538,2728,3026,3406,3877,4439,4940],[2661,2826,3148,3573,4138,4906,5541],[2750,2948,3359,3783,4428,5240,5877],[2784,2956,3378,3858,4520,5373,5964],[2784,3063,3477,4045,4750,5632,6247],[2737,3018,3444,4019,4739,5566,6214]],
        afa:[[1003,1230,1616,2104,2617,3508,3733],[1046,1198,1596,2166,2959,4050,4896],[1173,1399,1841,2548,3512,4690,5560],[1336,1619,2158,2898,3932,5093,5847],[1459,1803,2447,3244,4229,5416,6140],[1345,1879,2520,3369,4360,5276,6152],[1363,1681,2266,3063,3943,4914,5530]],
+       cb:[[222,227,241,258,281,312,325],[221,230,247,265,290,319,345],[233,240,256,277,304,342,368],[241,251,267,290,317,356,378],[242,256,274,299,328,362,384],[243,257,280,303,335,367,385],[240,252,274,299,326,356,373]],
+       cmb:[[174,179,191,202,215,237,245],[179,185,195,207,221,236,249],[183,188,199,212,228,246,264],[186,192,205,218,236,257,272],[187,193,206,220,238,260,274],[187,196,209,225,244,266,280],[185,195,208,225,244,264,279]],
        pt:[[10,12,15,18,22,26,30],[10,11,14,18,24,30,34],[10,12,16,21,27,34,37],[12,14,18,23,29,35,38],[12,16,20,25,30,36,40],[12,16,20,25,31,36,38],[12,14,18,24,29,34,36]]}
   };
   function ageIdx(E){ if(!isFinite(E)) return -1; if(E<18) return -1; for(let i=0;i<AGES.length;i++) if(E>=AGES[i][0]&&E<AGES[i][1]) return i; return AGES.length-1; }
@@ -1979,14 +2487,14 @@ Agua: ${fmt(agua*pc)} ml/día`;
     for(let i=0;i<6;i++) if(val<=row[i+1]){ const p=PCT[i]+(val-row[i])/(row[i+1]-row[i])*(PCT[i+1]-PCT[i]); return {p,txt:'P'+fmt(p,0)}; }
   }
   function clsOf(p,kind){
-    if(p<=5) return kind==='m'?['Déficit (depleción muscular)','c-bad']:['Déficit de reserva grasa','c-bad'];
+    if(p<=5) return kind==='m'?['Déficit (depleción muscular)','c-bad']:kind==='c'?['Déficit','c-bad']:['Déficit de reserva grasa','c-bad'];
     if(p<=15) return ['Bajo el promedio','c-warn'];
     if(p<=85) return ['Promedio','c-ok'];
     if(p<=95) return ['Sobre el promedio','c-low'];
-    return kind==='m'?['Alto (musculatura elevada)','c-low']:['Alto (exceso de adiposidad)','c-bad'];
+    return kind==='m'?['Alto (musculatura elevada)','c-low']:kind==='c'?['Alto','c-low']:['Alto (exceso de adiposidad)','c-bad'];
   }
 
-  function data(){ return {E:v('pEdad'),AR:v('pAR'),SE:v('pSE'),CB:v('pCB'),CP:v('pCP'),CA:v('pCA'),PSE:v('pPSE'),PT:v('pPT')}; }
+  function data(){ return {E:v('pEdad'),AR:v('pAR'),SE:v('pSE'),CB:v('pCB'),CP:v('pCP'),CA:v('pCA'),PSE:v('pPSE'),PT:v('pPT'),PB:v('pPB')}; }
   function rows(list,d,kind){
     const m=sx==='M';
     return list.map(q=>{
@@ -2019,7 +2527,8 @@ Agua: ${fmt(agua*pc)} ml/día`;
   function render(){
     const d=data();
     const T=table(TALLA,'t','cm',1), P=table(PESO,'p','kg',1);
-    $('pTBody').innerHTML=T.html; $('pPBody').innerHTML=P.html;
+    $('pTBody').innerHTML=T.html;
+    $('pPBody').innerHTML=P.html + (!P.chosen && !isFinite(d.CA) && !isFinite(d.PSE) ? '<tr><td colspan="5"><div class="warnbox">No hay ecuación de peso con los datos ingresados. Sin circunferencia abdominal ni pliegue subescapular, la opción mínima es Chumlea con altura de rodilla y circunferencia de brazo.</div></td></tr>' : '');
     $('qT').innerHTML=T.chosen?fmt(T.chosen.val,1)+'<small>cm</small>':'–'; $('qTn').textContent=T.chosen?T.chosen.q.n:'Faltan mediciones';
     $('qP').innerHTML=P.chosen?fmt(P.chosen.val,1)+'<small>kg</small>':'–'; $('qPn').textContent=P.chosen?P.chosen.q.n:'Faltan mediciones';
     if(T.chosen&&P.chosen){
@@ -2036,12 +2545,14 @@ Agua: ${fmt(agua*pc)} ml/día`;
       const cb=d.CB*10, pt=d.PT, cmb=cb-Math.PI*pt, amb=cmb*cmb/(4*Math.PI), agb=cb*cb/(4*Math.PI)-amb;
       const pa = ai<0 ? null : pctOf(amb,tab.ama[ai]);
       const pg = ai<0 ? null : pctOf(agb,tab.afa[ai]);
-      out.push(['Circunferencia muscular del brazo (CMB)',fmt(cmb/10,1)+' cm',null,null]);
+      out.push(['Circunferencia de brazo (CB)',fmt(d.CB,1)+' cm', ai<0?null:pctOf(cb,tab.cb[ai]),'c']);
+      out.push(['Circunferencia muscular del brazo (CMB)',fmt(cmb/10,1)+' cm', ai<0?null:pctOf(cmb,tab.cmb[ai]),'m']);
       out.push(['Área muscular del brazo (AMB)',fmt(amb)+' mm²',pa,'m']);
       out.push(['Área grasa del brazo (AGB)',fmt(agb)+' mm²',pg,'g']);
-      if(sx==='F' && ai>=0) out.push(['Pliegue tricipital',fmt(pt,1)+' mm',pctOf(pt,tab.pt[ai]),'g']);
+      out.push(['Pliegue tricipital (PT)',fmt(pt,1)+' mm', ai<0?null:pctOf(pt,tab.pt[ai]),'g']);
       if(pa) musc={p:pa,c:clsOf(pa.p,'m')};
     }
+    if(isFinite(d.PB)) out.push(['Pliegue bicipital',fmt(d.PB,1)+' mm',null,null]);
     if(!out.length) $('pFBody').innerHTML='<tr><td colspan="4" class="c-mut">Ingresa circunferencia de brazo y pliegue tricipital.</td></tr>';
     else $('pFBody').innerHTML=out.map(([n,val,p,k])=>{
         if(!p) return `<tr><td>${n}</td><td class="num">${val}</td><td class="num">${k&&ai<0?'Falta edad':'–'}</td><td>${k&&ai<0?'<span class="chip c-mut">Ingresa la edad</span>':''}</td></tr>`;
@@ -2050,8 +2561,86 @@ Agua: ${fmt(agua*pc)} ml/día`;
       }).join('') + (d.E>=75?'<tr><td colspan="4"><div class="warnbox">Frisancho 1981 llega a 74,9 años: para 75 o más se usa el grupo 65–74,9 como aproximación.</div></td></tr>':'');
     $('qM').textContent=musc?musc.p.txt:'–'; $('qMn').textContent=musc?musc.c[0]:'Requiere CB, PT y edad'; $('qMn').className='pill '+(musc?musc.c[1]:'c-mut');
     $('pFromPat').hidden=!(window.APP&&APP.hasPatient());
+    frDash(d);
   }
-  function setSx(x){ sx=x; document.querySelectorAll('[data-psx]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.psx===x)); render(); }
+
+  // ---------- Dashboard Frisancho: tarjetas, curvas y tablas completas ----------
+  let frTab='ama';
+  const FRL={cb:{n:'Circunferencia de brazo',s:'CB',u:'cm',k:'c',dv:x=>x/10,dec:1},pt:{n:'Pliegue tricipital',s:'PT',u:'mm',k:'g',dv:x=>x,dec:0},cmb:{n:'Circunferencia muscular del brazo',s:'CMB',u:'cm',k:'m',dv:x=>x/10,dec:1},ama:{n:'Área muscular del brazo',s:'AMB',u:'mm²',k:'m',dv:x=>x,dec:0},afa:{n:'Área grasa del brazo',s:'AGB',u:'mm²',k:'g',dv:x=>x,dec:0}};
+  const FRKEYS=['cb','pt','cmb','ama','afa'];
+  const AGEL=['18–18,9','19–24,9','25–34,9','35–44,9','45–54,9','55–64,9','65–74,9'];
+  const AGES_SHORT=['18','19–24','25–34','35–44','45–54','55–64','65–74'];
+  function frVals(d){
+    if(!isFinite(d.CB)||!isFinite(d.PT)) return null;
+    const cb=d.CB*10, cmb=cb-Math.PI*d.PT, amb=cmb*cmb/(4*Math.PI), agb=cb*cb/(4*Math.PI)-amb;
+    return {cb, cmb, ama:amb, afa:agb, pt:d.PT};
+  }
+  function frZones(r,k){
+    const p15=r[1]+(r[2]-r[1])/3, p85=r[4]+(r[5]-r[4])*2/3;
+    return [[-Infinity,r[0],'bad'],[r[0],p15,'warn'],[p15,p85,'ok'],[p85,r[6],'low'],[r[6],Infinity,k==='m'?'low':'bad']];
+  }
+  function frCard(key,val,r){
+    const L=FRL[key], p=pctOf(val,r), c=clsOf(p.p,L.k);
+    const a=Math.min(r[0]*0.7,val*0.95), b=Math.max(r[6]*1.12,val*1.05);
+    const pos=x=>Math.max(0,Math.min(100,(x-a)/(b-a)*100));
+    const z=frZones(r,L.k).map(([x0,x1,cl])=>{ const l=pos(Math.max(x0,a)), w=pos(Math.min(x1,b))-l; return `<span style="left:${l}%;width:${w}%;background:var(--${cl})"></span>`; }).join('');
+    const ln=r.map(x=>`<em style="left:${pos(x)}%"></em>`).join('');
+    const tk=[0,3,6].map(j=>`<span style="left:${pos(r[j])}%">P${PCT[j]}</span>`).join('');
+    return `<button type="button" class="frc" data-frt="${key}" aria-pressed="${frTab===key}">
+      <div class="frc-h"><span class="k">${L.s} · ${L.n.toUpperCase()}</span><b>${fmt(L.dv(val),key==='pt'?1:L.dec)}<small>${L.u}</small></b><span class="chip ${c[1]}">${p.txt} · ${c[0]}</span></div>
+      <div class="frsc"><div class="frbar">${z}${ln}</div><i class="frm" style="left:${pos(val)}%"></i></div>
+      <div class="frtk">${tk}</div></button>`;
+  }
+  function frChart(rows,ai,val,L){ const unit=L.u;
+    const W=560,H=230,pl=48,pr=40,pt=16,pb=34;
+    let y0=Math.min(...rows.map(r=>r[0])), y1=Math.max(...rows.map(r=>r[6]));
+    if(isFinite(val)){ y0=Math.min(y0,val); y1=Math.max(y1,val); }
+    const pad=(y1-y0)*0.1; y0=Math.max(0,y0-pad); y1+=pad;
+    const n=rows.length, X=i=>pl+(i+0.5)*(W-pl-pr)/n, Y=v=>pt+(1-(v-y0)/(y1-y0))*(H-pt-pb);
+    const line=j=>rows.map((r,i)=>X(i).toFixed(1)+','+Y(r[j]).toFixed(1)).join(' ');
+    const band=(a,b)=>rows.map((r,i)=>X(i).toFixed(1)+','+Y(r[b]).toFixed(1)).join(' ')+' '+rows.map((r,i)=>[i,r]).reverse().map(([i,r])=>X(i).toFixed(1)+','+Y(r[a]).toFixed(1)).join(' ');
+    const cw=(W-pl-pr)/n;
+    let s=`<svg class="frch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Curvas de percentiles por grupo de edad">`;
+    if(ai>=0) s+=`<rect class="col" x="${(pl+ai*cw).toFixed(1)}" y="${pt}" width="${cw.toFixed(1)}" height="${H-pt-pb}" rx="4"/>`;
+    [0,0.5,1].forEach(f=>{ const v=y0+(y1-y0)*f; s+=`<line class="gl" x1="${pl}" x2="${W-pr}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text class="tx" x="${pl-6}" y="${(Y(v)+3).toFixed(1)}" text-anchor="end">${fmt(L.dv(v),L.dec)}</text>`; });
+    s+=`<polygon class="b1" points="${band(0,6)}"/><polygon class="b2" points="${band(2,4)}"/>`;
+    s+=`<polyline class="pe" points="${line(0)}"/><polyline class="pe" points="${line(6)}"/><polyline class="p50" points="${line(3)}"/>`;
+    const last=rows[n-1];
+    [[0,'P5'],[3,'P50'],[6,'P95']].forEach(([j,l])=>{ s+=`<text class="tx${j===3?' b':''}" x="${(X(n-1)+8).toFixed(1)}" y="${(Y(last[j])+3).toFixed(1)}">${l}</text>`; });
+    rows.forEach((r,i)=>{ s+=`<text class="tx${i===ai?' b':''}" x="${X(i).toFixed(1)}" y="${H-pb+16}" text-anchor="middle">${AGES_SHORT[i]}</text>`; });
+    s+=`<text class="tx" x="${pl}" y="${H-4}">edad (años) · ${unit}</text>`;
+    if(ai>=0&&isFinite(val)) s+=`<circle class="dot" cx="${X(ai).toFixed(1)}" cy="${Y(val).toFixed(1)}" r="6"/><text class="tx b" x="${X(ai).toFixed(1)}" y="${(Y(val)-11).toFixed(1)}" text-anchor="middle">${fmt(L.dv(val),unit==='mm'?1:L.dec)}</text>`;
+    return s+'</svg>';
+  }
+  function frTable(rows,ai,val,L){
+    let hit=[];
+    if(ai>=0&&isFinite(val)){ const r=rows[ai]; if(val<=r[0]) hit=[0]; else if(val>=r[6]) hit=[6]; else { const j=r.findIndex(x=>val<=x); hit=[j-1,j]; } }
+    return `<thead><tr><th>Edad (años)</th>${PCT.map(p=>`<th>P${p}</th>`).join('')}</tr></thead><tbody>`+
+      rows.map((r,i)=>`<tr class="${i===ai?'me':''}"><td>${AGEL[i]}${i===ai?' ◂':''}</td>${r.map((x,j)=>`<td class="${i===ai&&hit.includes(j)?'hit':''}">${fmt(L.dv(x),L.dec)}</td>`).join('')}</tr>`).join('')+'</tbody>';
+  }
+  function frDash(d){
+    const ai=ageIdx(d.E), tab=FR[sx], v=frVals(d);
+    const keys=FRKEYS;
+    $('frCards').innerHTML = !v ? '<div class="frempty">Ingresa circunferencia de brazo y pliegue tricipital para ver el resultado sobre las tablas.</div>'
+      : ai<0 ? '<div class="frempty">Ingresa la edad para ubicar al paciente en su grupo de referencia.</div>'
+      : keys.map(k=>frCard(k,v[k],tab[k][ai])).join('');
+    document.querySelectorAll('[data-frt]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.frt===frTab));
+    const L=FRL[frTab], rows=tab[frTab], val=v?v[frTab]:NaN;
+    $('frTitle').textContent=`${L.n} (${L.u}) · ${sx==='M'?'Hombres':'Mujeres'}`;
+    $('frChart').innerHTML=frChart(rows,ai,val,L);
+    $('frTbl').innerHTML=frTable(rows,ai,val,L);
+  }
+  document.addEventListener('click',e=>{ const b=e.target.closest('[data-frt]'); if(!b||b.disabled) return; frTab=b.dataset.frt; render(); });
+  function setSx(x){ sx=x; document.querySelectorAll('[data-psx]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.psx===x)); render(); window.dispatchEvent(new Event('preddirty')); }
+  const PF=['pEdad','pAR','pSE','pCB','pCP','pCA','pPSE','pPT','pPB'];
+  window.PRED={
+    get(){ const o={sx}; PF.forEach(k=>{ o[k]=$(k).value; }); return o; },
+    set(o){
+      if(!o){ const f=window.EVAL?EVAL.get():{}; o={sx:f.sexo==='F'?'F':'M',pEdad:f.edad||''}; }
+      PF.forEach(k=>{ $(k).value=o[k]!=null?o[k]:''; }); selT=selP=null; setSx(o.sx==='F'?'F':'M');
+    }
+  };
+  $('pf').addEventListener('input',()=>window.dispatchEvent(new Event('preddirty')));
   document.querySelectorAll('[data-psx]').forEach(b=>b.addEventListener('click',()=>setSx(b.dataset.psx)));
   $('pf').addEventListener('input',render);
   $('pf').addEventListener('submit',e=>e.preventDefault());
@@ -2070,91 +2659,386 @@ Agua: ${fmt(agua*pc)} ml/día`;
 })();
 </script>
 
-</body></html>
+
+<div class="sheet-bg" id="sheetBg" hidden></div>
+
+<section class="sheet" id="qSheet" role="dialog" aria-modal="true" aria-labelledby="qSheetT" hidden>
+  <div class="sheet-grip"><i></i></div>
+  <div class="sheet-h"><h3 id="qSheetT">Datos del paciente</h3><button class="btn primary" type="button" data-close>Listo</button></div>
+  <div class="sheet-body">
+    <div class="qlive" id="qLive"></div>
+    <div class="qsec">Identificación y antropometría</div>
+    <div class="qgrid">
+      <div class="qf full"><span>Sexo</span><div class="seg" role="group" aria-label="Sexo"><button type="button" data-qsx="M">Hombre</button><button type="button" data-qsx="F">Mujer</button></div></div>
+      <label class="qf"><span>Peso (kg)</span><div class="stp"><button type="button" data-step="-0.5" data-f="peso" aria-label="Restar 0,5 kg">−</button><input type="number" inputmode="decimal" step="0.1" data-f="peso"><button type="button" data-step="0.5" data-f="peso" aria-label="Sumar 0,5 kg">+</button></div></label>
+      <label class="qf"><span>Talla (cm)</span><div class="stp"><button type="button" data-step="-0.5" data-f="talla" aria-label="Restar 0,5 cm">−</button><input type="number" inputmode="decimal" step="0.1" data-f="talla"><button type="button" data-step="0.5" data-f="talla" aria-label="Sumar 0,5 cm">+</button></div></label>
+      <label class="qf"><span>Edad (años)</span><div class="stp"><button type="button" data-step="-1" data-f="edad" aria-label="Restar 1 año">−</button><input type="number" inputmode="numeric" step="1" data-f="edad"><button type="button" data-step="1" data-f="edad" aria-label="Sumar 1 año">+</button></div></label>
+      <label class="qf"><span>Cintura (cm)</span><div class="stp"><button type="button" data-step="-0.5" data-f="cintura" aria-label="Restar 0,5 cm">−</button><input type="number" inputmode="decimal" step="0.5" data-f="cintura"><button type="button" data-step="0.5" data-f="cintura" aria-label="Sumar 0,5 cm">+</button></div></label>
+      <label class="qf"><span>Circ. brazo (cm)</span><div class="stp"><button type="button" data-step="-0.5" data-f="pCB" aria-label="Restar 0,5 cm">−</button><input type="number" inputmode="decimal" step="0.1" data-f="pCB"><button type="button" data-step="0.5" data-f="pCB" aria-label="Sumar 0,5 cm">+</button></div></label>
+      <label class="qf"><span>Pliegue tricipital (mm)</span><div class="stp"><button type="button" data-step="-0.5" data-f="pPT" aria-label="Restar 0,5 mm">−</button><input type="number" inputmode="decimal" step="0.5" data-f="pPT"><button type="button" data-step="0.5" data-f="pPT" aria-label="Sumar 0,5 mm">+</button></div></label>
+      <label class="qf"><span>Circ. pantorrilla (cm)</span><div class="stp"><button type="button" data-step="-0.5" data-f="pCP" aria-label="Restar 0,5 cm">−</button><input type="number" inputmode="decimal" step="0.1" data-f="pCP"><button type="button" data-step="0.5" data-f="pCP" aria-label="Sumar 0,5 cm">+</button></div></label>
+      <label class="qf"><span>Altura de rodilla (cm)</span><div class="stp"><button type="button" data-step="-0.5" data-f="pAR" aria-label="Restar 0,5 cm">−</button><input type="number" inputmode="decimal" step="0.1" data-f="pAR"><button type="button" data-step="0.5" data-f="pAR" aria-label="Sumar 0,5 cm">+</button></div></label>
+    </div>
+    <div class="qsec">Cálculo del VCT</div>
+    <div class="qgrid">
+      <label class="qf"><span>Peso para cálculo</span><select data-f="pesoCalc" data-from="pesoCalc"></select></label>
+      <label class="qf"><span>Ecuación</span><select data-f="eqSel" data-from="eqSel"></select></label>
+      <label class="qf"><span>Actividad física</span><select data-f="fa" data-from="fa"></select></label>
+      <label class="qf"><span>Estrés o trauma</span><select data-f="fe" data-from="feSel"></select></label>
+      <label class="qf"><span>Proteína (g/kg)</span><div class="stp"><button type="button" data-step="-0.1" data-f="prot" aria-label="Restar 0,1 g/kg">−</button><input type="number" inputmode="decimal" step="0.1" data-f="prot"><button type="button" data-step="0.1" data-f="prot" aria-label="Sumar 0,1 g/kg">+</button></div></label>
+      <label class="qf"><span>Lípidos (% VCT)</span><div class="stp"><button type="button" data-step="-1" data-f="lip" aria-label="Restar 1 %">−</button><input type="number" inputmode="numeric" step="1" data-f="lip"><button type="button" data-step="1" data-f="lip" aria-label="Sumar 1 %">+</button></div></label>
+      <label class="qf"><span>Carbohidratos</span><select data-f="choMode" data-from="choMode"></select></label>
+      <label class="qf"><span>CHO (% VCT o g/kg)</span><div class="stp"><button type="button" data-step="-1" data-f="choVal" aria-label="Restar 1">−</button><input type="number" inputmode="decimal" step="0.5" data-f="choVal"><button type="button" data-step="1" data-f="choVal" aria-label="Sumar 1">+</button></div></label>
+      <label class="qf"><span>kcal/kg indicadas</span><div class="stp"><button type="button" data-step="-1" data-f="kcalkg" aria-label="Restar 1 kcal/kg">−</button><input type="number" inputmode="decimal" step="0.5" data-f="kcalkg"><button type="button" data-step="1" data-f="kcalkg" aria-label="Sumar 1 kcal/kg">+</button></div></label>
+      <label class="qf"><span>VCT indicado (kcal)</span><div class="stp"><button type="button" data-step="-50" data-f="vctMan" aria-label="Restar 50 kcal">−</button><input type="number" inputmode="numeric" step="10" data-f="vctMan"><button type="button" data-step="50" data-f="vctMan" aria-label="Sumar 50 kcal">+</button></div></label>
+      <label class="qf"><span>IMC objetivo</span><div class="stp"><button type="button" data-step="-0.5" data-f="imcObj" aria-label="Restar 0,5">−</button><input type="number" inputmode="decimal" step="0.5" data-f="imcObj"><button type="button" data-step="0.5" data-f="imcObj" aria-label="Sumar 0,5">+</button></div></label>
+      <label class="qf"><span>Agua (ml/kg)</span><div class="stp"><button type="button" data-step="-1" data-f="agua" aria-label="Restar 1 ml/kg">−</button><input type="number" inputmode="numeric" step="1" data-f="agua"><button type="button" data-step="1" data-f="agua" aria-label="Sumar 1 ml/kg">+</button></div></label>
+    </div>
+    <p class="note">Cada cambio recalcula al instante y se guarda en la ficha. «kcal/kg indicadas» y «VCT indicado» se aplican al elegir esa opción en Ecuación. Desliza hacia abajo para cerrar.</p>
+  </div>
+</section>
+
+<section class="sheet" id="nSheet" role="dialog" aria-modal="true" aria-labelledby="nSheetT" hidden>
+  <div class="sheet-grip"><i></i></div>
+  <div class="sheet-h"><h3 id="nSheetT">Notas del paciente</h3><button class="btn primary" type="button" data-close>Listo</button></div>
+  <div class="sheet-body">
+    <label class="qf full"><span>Anotación rápida</span><textarea id="nQuick" rows="3" maxlength="600" placeholder="Ej.: tolera 75 % del almuerzo, sin náuseas"></textarea></label>
+    <div class="ntags" id="nTags" role="group" aria-label="Tipo de anotación">
+      <button type="button" data-tag="Ingesta" aria-pressed="false">Ingesta</button>
+      <button type="button" data-tag="Tolerancia" aria-pressed="false">Tolerancia</button>
+      <button type="button" data-tag="Evolución" aria-pressed="false">Evolución</button>
+      <button type="button" data-tag="Indicación" aria-pressed="false">Indicación</button>
+      <button type="button" data-tag="Pendiente" aria-pressed="false">Pendiente</button>
+      <button type="button" data-tag="Educación" aria-pressed="false">Educación</button>
+    </div>
+    <div class="btnrow" style="margin-top:0"><button class="btn primary" type="button" id="nAdd">Agregar anotación</button></div>
+    <div class="qsec">Anotaciones recientes</div>
+    <div class="nlist" id="nList"></div>
+    <label class="qf full"><span>Notas clínicas completas (editables)</span><textarea id="nAll" rows="8" maxlength="8000"></textarea></label>
+    <p class="note">Se guardan en la ficha del paciente y salen en el informe PDF.</p>
+  </div>
+</section>
+
+<section class="sheet" id="vSheet" role="dialog" aria-modal="true" aria-labelledby="vSheetT" hidden>
+  <div class="sheet-grip"><i></i></div>
+  <div class="sheet-h"><h3 id="vSheetT">Ajustes de vista</h3><button class="btn primary" type="button" data-close>Listo</button></div>
+  <div class="sheet-body">
+    <div class="vrow"><span>Tamaño de texto <b id="vFsTxt">100 %</b></span><input type="range" id="vFs" min="85" max="130" step="5" value="100" aria-label="Tamaño de texto"></div>
+    <div class="vrow"><span>Modo compacto</span><button class="btn" type="button" id="vCompact" aria-pressed="false">Desactivado</button></div>
+    <div class="vrow"><span>Resumen fijo del paciente</span><button class="btn" type="button" id="vStrip" aria-pressed="true">Visible</button></div>
+    <div class="vrow"><span>Paneles de la pestaña actual</span><span class="btnrow" style="margin:0"><button class="btn" type="button" id="vCollapse">Contraer</button><button class="btn" type="button" id="vExpand">Expandir</button></span></div>
+    <div class="qsec">Secciones visibles en Evaluación</div>
+    <div class="vsecs" id="vSecs"></div>
+    <p class="note">Desmarca lo que no uses para quitarlo de la pantalla; ocultar no borra los datos ya ingresados. Toca el título de cualquier panel para contraerlo, un gráfico para ampliarlo, y cualquier resultado (VCT, macronutrientes, ecuaciones) para editar el dato que lo determina. Estos ajustes quedan en este dispositivo.</p>
+    <div class="btnrow"><button class="btn" type="button" id="vReset">Restablecer vista</button></div>
+  </div>
+</section>
+
+<section class="sheet" id="cSheet" role="dialog" aria-modal="true" aria-labelledby="cSheetT" hidden>
+  <div class="sheet-grip"><i></i></div>
+  <div class="sheet-h"><h3 id="cSheetT">Gráfico</h3><button class="btn primary" type="button" data-close>Cerrar</button></div>
+  <div class="sheet-body">
+    <div class="vrow" style="padding-top:0"><span>Ampliación <b id="cZTxt">100 %</b></span><input type="range" id="cZ" min="100" max="300" step="10" value="100" aria-label="Ampliación del gráfico"></div>
+    <div class="cview" id="cView"></div>
+    <p class="note">Desliza para recorrer el gráfico ampliado. En el teléfono también puedes girarlo a horizontal.</p>
+  </div>
+</section>
+
+<button class="fab" type="button" id="nFab" hidden aria-label="Notas del paciente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>Notas <span class="bdg" id="nBdg">0</span></button>
+
 <script>
-/* Instalación, actualización y respaldo de la app. */
+/* Ficha rápida móvil: resumen fijo, edición táctil, notas, vista ajustable y gráficos ampliables. */
 (function(){
-  const APP_VERSION='1.0.0';
   const $=id=>document.getElementById(id);
-  const toast=m=>{ const t=$('toast'); t.textContent=m; t.hidden=false; clearTimeout(toast.t); toast.t=setTimeout(()=>t.hidden=true,3000); };
-  const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true;
-  const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
-  let dismissed=false; try{ dismissed=localStorage.getItem('install-no')==='1'; }catch(e){}
-  $('appVer').textContent='Versión '+APP_VERSION+(standalone?' · instalada':'');
+  const fmt=(n,d=0)=>isFinite(n)?n.toLocaleString('es-CL',{minimumFractionDigits:d,maximumFractionDigits:d}):'–';
+  const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const clsC=c=>c==='Normal'?'c-ok':c==='Sobrepeso'?'c-warn':c==='Bajo peso'?'c-low':'c-bad';
+  const has=()=>!!(window.APP&&APP.hasPatient());
+  const LS=(k,v)=>{ try{ if(v===undefined) return JSON.parse(localStorage.getItem(k)); localStorage.setItem(k,JSON.stringify(v)); }catch(e){ return null; } };
+  const TABN={pac:'Pacientes',eval:'Evaluación',plan:'Plan',pred:'Predictivas',tpl:'Pautas'};
+  const curTab=()=>{ const b=document.querySelector('.tabs [aria-selected="true"]'); return b?b.id.replace('tab-',''):'pac'; };
 
-  // Instalar
-  let deferred=null;
-  window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferred=e; if(!standalone && !dismissed) $('installBar').hidden=false; });
-  if(ios && !standalone && !dismissed){
-    $('installTxt').innerHTML='Para instalarla en el iPhone: abre esta página en <b>Safari</b>, toca <b>Compartir</b> y elige <b>Agregar a pantalla de inicio</b>.';
-    $('installBtn').hidden=true; $('installBar').hidden=false;
+  // ---------- Vista (por dispositivo) ----------
+  const V=Object.assign({fs:100,compact:false,strip:true,col:{}},LS('vista')||{});
+  function applyView(){
+    document.documentElement.style.setProperty('--fs',V.fs+'%');
+    document.body.classList.toggle('compact',!!V.compact);
+    $('vFs').value=V.fs; $('vFsTxt').textContent=V.fs+' %';
+    $('vCompact').setAttribute('aria-pressed',!!V.compact); $('vCompact').textContent=V.compact?'Activado':'Desactivado';
+    $('vStrip').setAttribute('aria-pressed',!!V.strip); $('vStrip').textContent=V.strip?'Visible':'Oculto';
+    renderStrip();
   }
-  $('installBtn').addEventListener('click',async()=>{ if(!deferred) return; deferred.prompt(); const r=await deferred.userChoice; deferred=null; $('installBar').hidden=true; if(r.outcome==='accepted') toast('Calculadora instalada.'); });
-  $('installNo').addEventListener('click',()=>{ $('installBar').hidden=true; try{ localStorage.setItem('install-no','1'); }catch(e){} });
-  window.addEventListener('appinstalled',()=>{ $('installBar').hidden=true; });
+  const saveView=()=>LS('vista',V);
+  $('vFs').addEventListener('input',e=>{ V.fs=+e.target.value; saveView(); applyView(); });
+  $('vCompact').addEventListener('click',()=>{ V.compact=!V.compact; saveView(); applyView(); });
+  $('vStrip').addEventListener('click',()=>{ V.strip=!V.strip; saveView(); applyView(); });
+  $('vReset').addEventListener('click',()=>{ V.fs=100; V.compact=false; V.strip=true; V.col={}; saveView(); document.querySelectorAll('.panel.collapsed').forEach(p=>p.classList.remove('collapsed')); applyView(); });
 
-  // Trabajo sin internet y actualizaciones
-  if('serviceWorker' in navigator && location.protocol!=='file:'){
-    let reloading=false;
-    navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(reloading) return; reloading=true; location.reload(); });
-    navigator.serviceWorker.register('sw.js').then(reg=>{
-      const show=w=>{ $('updateBar').hidden=false; $('updateBtn').onclick=()=>w.postMessage('skipWaiting'); };
-      if(reg.waiting && navigator.serviceWorker.controller) show(reg.waiting);
-      reg.addEventListener('updatefound',()=>{ const w=reg.installing; w && w.addEventListener('statechange',()=>{ if(w.state==='installed' && navigator.serviceWorker.controller) show(w); }); });
-      document.addEventListener('visibilitychange',()=>{ if(!document.hidden) reg.update().catch(()=>{}); });
-    }).catch(()=>{});
+  // ---------- Paneles plegables ----------
+  function panelKey(sec){
+    const view=sec.closest('[role="tabpanel"]'), scope=view?view.id:'g';
+    const list=[...(view||document).querySelectorAll('.panel')].filter(x=>x.firstElementChild&&x.firstElementChild.tagName==='H2');
+    return scope+':'+(sec.id||list.indexOf(sec));
   }
-
-  // Respaldo
-  async function meter(){
-    try{
-      const docs=await LOCALDB.exportAll(), v=Object.values(docs);
-      const n=t=>v.filter(d=>d.t===t).length;
-      let txt=`${n('p')} pacientes · ${n('v')} controles · ${n('tpl')} pautas`;
-      if(navigator.storage && navigator.storage.persisted){ const p=await navigator.storage.persisted(); txt+=p?' · almacenamiento protegido':' · almacenamiento no protegido'; }
-      $('bkMeter').textContent=txt;
-    }catch(e){ $('bkMeter').textContent=''; }
+  function markPanels(){
+    document.querySelectorAll('.panel').forEach(sec=>{
+      const h=sec.firstElementChild; if(!h||h.tagName!=='H2') return;
+      if(!h.classList.contains('colh')){ h.classList.add('colh'); h.setAttribute('role','button'); h.tabIndex=0; }
+      const k=panelKey(sec), c=!!V.col[k];
+      sec.classList.toggle('collapsed',c); h.setAttribute('aria-expanded',!c);
+    });
   }
-  $('backupBox').addEventListener('toggle',()=>{ if($('backupBox').open) meter(); });
-  $('bkExport').addEventListener('click',async()=>{
-    try{
-      const docs=await LOCALDB.exportAll();
-      const payload=JSON.stringify({app:'calculadora-nutricional',version:APP_VERSION,exportedAt:new Date().toISOString(),docs});
-      await LOCALDB.saveFile('Respaldo_CalcNutri_'+new Date().toISOString().slice(0,10)+'.json',payload,'application/json');
-      try{ localStorage.setItem('last-backup',new Date().toISOString()); }catch(e){}
-      toast('Respaldo exportado.');
-    }catch(e){ if(!e || e.code!=='declined') toast('No se pudo exportar el respaldo.'); }
-  });
-  let pending=null;
-  $('bkImport').addEventListener('click',()=>{
-    if(pending){ const d=pending; pending=null; $('bkImport').textContent='Importar respaldo';
-      LOCALDB.importAll(d).then(n=>{ toast(n+' registros importados.'); meter(); }).catch(()=>toast('No se pudo importar el respaldo.')); return; }
-    $('bkFile').value=''; $('bkFile').click();
-  });
-  $('bkFile').addEventListener('change',async()=>{
-    const f=$('bkFile').files[0]; if(!f) return;
-    try{
-      const j=JSON.parse(await f.text());
-      if(!j || j.app!=='calculadora-nutricional' || typeof j.docs!=='object') throw 0;
-      const n=Object.keys(j.docs).length;
-      pending=j.docs;
-      $('bkImport').textContent=`Confirmar: importar ${n} registros`;
-      toast('Revisa y confirma. Los registros con el mismo identificador se reemplazan.');
-      setTimeout(()=>{ if(pending===j.docs){ pending=null; $('bkImport').textContent='Importar respaldo'; } },15000);
-    }catch(e){ toast('El archivo no es un respaldo válido de esta app.'); }
+  function togglePanel(sec,force){
+    const k=panelKey(sec), c=force!==undefined?force:!sec.classList.contains('collapsed');
+    sec.classList.toggle('collapsed',c); if(c) V.col[k]=1; else delete V.col[k];
+    const h=sec.firstElementChild; if(h) h.setAttribute('aria-expanded',!c); saveView();
+  }
+  document.addEventListener('click',e=>{ const h=e.target.closest('.panel>h2.colh'); if(!h||e.target.closest('button,a,input,select')) return; togglePanel(h.parentElement); });
+  document.addEventListener('keydown',e=>{ const h=e.target.closest&&e.target.closest('.panel>h2.colh'); if(h&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); togglePanel(h.parentElement); } });
+  function tabPanels(){ const v=$('view-'+curTab()); return v?[...v.querySelectorAll('.panel')].filter(x=>x.firstElementChild&&x.firstElementChild.tagName==='H2'):[]; }
+  $('vCollapse').addEventListener('click',()=>tabPanels().forEach(p=>togglePanel(p,true)));
+  $('vExpand').addEventListener('click',()=>tabPanels().forEach(p=>togglePanel(p,false)));
+
+  // ---------- Hojas deslizables ----------
+  let openSheet=null, lastFocus=null;
+  function show(id){
+    if(openSheet) hide(true);
+    lastFocus=document.activeElement; openSheet=$(id);
+    $('sheetBg').hidden=false; openSheet.hidden=false; openSheet.style.transform='';
+    document.body.style.overflow='hidden';
+    const f=openSheet.querySelector('[data-close]'); if(f) f.focus({preventScroll:true});
+  }
+  function hide(silent){
+    if(!openSheet) return;
+    openSheet.hidden=true; openSheet.style.transform=''; openSheet=null;
+    $('sheetBg').hidden=true; document.body.style.overflow='';
+    if(!silent&&lastFocus&&lastFocus.focus) lastFocus.focus({preventScroll:true});
+    renderStrip();
+  }
+  $('sheetBg').addEventListener('click',()=>hide());
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&openSheet) hide(); });
+  document.querySelectorAll('.sheet [data-close]').forEach(b=>b.addEventListener('click',()=>hide()));
+  // Deslizar hacia abajo para cerrar
+  document.querySelectorAll('.sheet').forEach(sh=>{
+    let y0=null, dy=0;
+    sh.querySelectorAll('.sheet-grip,.sheet-h').forEach(z=>{
+      z.addEventListener('touchstart',e=>{ if(e.target.closest('button')) return; y0=e.touches[0].clientY; dy=0; sh.classList.add('drag'); },{passive:true});
+      z.addEventListener('touchmove',e=>{ if(y0==null) return; dy=Math.max(0,e.touches[0].clientY-y0); sh.style.transform=matchMedia('(min-width:761px)').matches?`translateY(calc(-50% + ${dy}px))`:`translateY(${dy}px)`; },{passive:true});
+      z.addEventListener('touchend',()=>{ if(y0==null) return; sh.classList.remove('drag'); if(dy>90) hide(); else sh.style.transform=''; y0=null; });
+    });
   });
 
-  // Recordatorio de respaldo cada 7 días si hay pacientes
-  setTimeout(async()=>{
-    try{
-      let first=localStorage.getItem('first-use'); if(!first){ first=new Date().toISOString(); localStorage.setItem('first-use',first); }
-      const last=localStorage.getItem('last-backup')||first, docs=await LOCALDB.exportAll();
-      const hasP=Object.values(docs).some(d=>d.t==='p');
-      if(hasP && Date.now()-new Date(last).getTime()>7*864e5) toast('Han pasado más de 7 días sin respaldo. Expórtalo en Pacientes › Respaldo de datos.');
-    }catch(e){}
-  },2500);
+  // ---------- Resumen fijo ----------
+  function notesText(){ return ($('pdNotes')&&$('pdNotes').value)||''; }
+  function annotations(){ return notesText().split('\n').filter(l=>/^\[\d{2}-\d{2}/.test(l.trim())); }
+  function predVals(){ const g=k=>{ const el=$(k); const x=el?parseFloat(el.value):NaN; return isFinite(x)&&x>0?x:NaN; }; return {CB:g('pCB'),PT:g('pPT'),CP:g('pCP'),AR:g('pAR')}; }
+  function updateQH(){ const st=$('qstrip'); document.documentElement.style.setProperty('--qh',(st.hidden?0:st.offsetHeight)+'px'); }
+  function renderStrip(){
+    const on=has(), st=$('qstrip');
+    const L0=window.EVAL&&EVAL.last(), work=on||(!!L0&&['eval','plan','pred'].includes(curTab()));
+    st.hidden=!(work&&V.strip); $('nFab').hidden=!on;
+    if(!work){ updateQH(); return; }
+    const L=L0, f=window.EVAL?EVAL.get():{}, pv=predVals();
+    $('qName').textContent=on?$('pbName').textContent:'Sin ficha · no se guarda';
+    $('qMeta').textContent=(f.sexo==='F'?'Mujer':'Hombre')+(f.edad?' · '+f.edad+' años':'');
+    const ch=[];
+    const C=(k,v,i,q,cls)=>ch.push(`<button type="button" class="qc ${cls||''}" data-q="${q||''}" role="listitem"><span>${k}</span><b>${v}</b>${i?`<i>${i}</i>`:''}</button>`);
+    if(!L){ C('Datos','Completar','peso, talla y edad','peso','warn'); }
+    else{
+      C('VCT',fmt(L.get)+' kcal',fmt(L.get/L.pc,1)+' kcal/kg','fa','vct');
+      C('Peso',fmt(L.peso,1)+' kg',L.pcLabel!=='actual'?'cálculo '+fmt(L.pc,1):'','peso');
+      C('Talla',fmt(L.talla,1)+' cm','','talla');
+      C('IMC',fmt(L.imc,1),`<span class="${clsC(L.cls)}" style="font:inherit;letter-spacing:0;text-transform:none">${L.cls}</span>`,'peso');
+      C('Prot',fmt(L.pG)+' g',fmt(L.prot,1)+' g/kg','prot');
+      C('Líp',fmt(L.lG)+' g',fmt(L.lip,0)+' %','lip');
+      C('CHO',fmt(L.cG)+' g',fmt(L.cP,0)+' %','choMode');
+      if(isFinite(L.cin)) C('Cintura',fmt(L.cin,1)+' cm','','cintura');
+      if(isFinite(pv.CB)) C('CB',fmt(pv.CB,1)+' cm','','pCB');
+      if(isFinite(pv.PT)) C('PT',fmt(pv.PT,1)+' mm','','pPT');
+      if(isFinite(pv.CP)) C('CP',fmt(pv.CP,1)+' cm','','pCP');
+    }
+    const sx=$('qChips').scrollLeft; $('qChips').innerHTML=ch.join(''); $('qChips').scrollLeft=sx;
+    $('qMac').innerHTML=L?`<i style="width:${L.pP}%;background:var(--accent)"></i><i style="width:${L.lip}%;background:var(--warn)"></i><i style="width:${L.cP}%;background:var(--low)"></i>`:'';
+    const m=[];
+    const M=(k,v,q)=>m.push(`<button type="button" class="qm" data-q="${q||''}"><span>${k}</span><b>${v}</b></button>`);
+    if(L){
+      M('Peso ideal',fmt(L.pi,1)+' kg · '+fmt(L.pct,0)+' %','imcObj');
+      M('Peso ajustado',fmt(L.pa,1)+' kg','pesoCalc');
+      M('Peso máx. aceptable',fmt(L.pma,1)+' kg','pesoCalc');
+      M('Rango normal',fmt(L.lo,1)+'–'+fmt(L.hi,1)+' kg','imcObj');
+      M('Peso de cálculo',fmt(L.pc,1)+' kg · '+L.pcLabel,'pesoCalc');
+      M('GEB',fmt(L.geb)+' kcal · '+L.eqName,'eqSel');
+      M('Factores','FA '+String(L.fa).replace('.',',')+' · FE '+String(L.fe).replace('.',','),'fa');
+      M('Agua',fmt(L.aguaMl)+' ml/día','agua');
+    }
+    if(isFinite(pv.AR)) M('Altura de rodilla',fmt(pv.AR,1)+' cm','pAR');
+    const an=annotations(), last=an[0]||notesText().split('\n').find(x=>x.trim());
+    m.push(`<button type="button" class="qm note" data-n="1"><span>${an.length?'Última anotación':'Notas'}</span><b>${last?esc(last):'Sin notas. Toca para agregar.'}</b></button>`);
+    $('qMore').innerHTML=m.join('');
+    $('nBdg').textContent=an.length;
+    updateQH();
+  }
+  $('qMoreBtn').addEventListener('click',()=>{ const o=$('qMore').hidden; $('qMore').hidden=!o; $('qMoreBtn').setAttribute('aria-expanded',o); updateQH(); });
+  $('qstrip').addEventListener('click',e=>{
+    const n=e.target.closest('[data-n]'); if(n){ openNotes(); return; }
+    const b=e.target.closest('[data-q],#qWho'); if(!b) return;
+    openEdit(b.dataset&&b.dataset.q||'peso');
+  });
+  if(window.ResizeObserver) new ResizeObserver(updateQH).observe($('qstrip'));
+
+  // ---------- Edición táctil ----------
+  const PREDF=['pCB','pPT','pCP','pAR'];
+  document.querySelectorAll('#qSheet select[data-from]').forEach(sel=>{ sel.innerHTML=$(sel.dataset.from).innerHTML; [...sel.options].forEach(o=>{ if(o.value==='custom') o.remove(); }); });
+  function srcVal(f){ if(f==='fe') return $('fe').value; const el=$(f); return el?el.value:''; }
+  function syncSheet(){
+    if($('qSheet').hidden) return;
+    document.querySelectorAll('#qSheet [data-f]').forEach(el=>{
+      if(el.tagName==='BUTTON'||el===document.activeElement) return;
+      const v=srcVal(el.dataset.f);
+      if(el.tagName==='SELECT'){ const o=[...el.options].find(o=>parseFloat(o.value)===parseFloat(v)||o.value===v); if(o) el.value=o.value; }
+      else el.value=v;
+    });
+    const sx=window.EVAL?EVAL.sexo():'M';
+    document.querySelectorAll('[data-qsx]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.qsx===sx));
+    const L=window.EVAL&&EVAL.last();
+    $('qLive').innerHTML=L?`<div class="big">${fmt(L.get)}<small>KCAL/DÍA</small></div><div><b>P</b> ${fmt(L.pG)} g · <b>L</b> ${fmt(L.lG)} g · <b>CHO</b> ${fmt(L.cG)} g</div><div>IMC ${fmt(L.imc,1)} <span class="${clsC(L.cls)}">${L.cls}</span> · peso de cálculo ${fmt(L.pc,1)} kg (${L.pcLabel})</div>`
+      :'<div class="big">–<small>KCAL/DÍA</small></div><div>Ingresa peso, talla y edad para calcular el VCT.</div>';
+  }
+  function setF(f,v){
+    if(PREDF.includes(f)){ const el=$(f); el.value=v; el.dispatchEvent(new Event('input',{bubbles:true})); renderStrip(); syncSheet(); return; }
+    if(window.EVAL) EVAL.setField(f,v);
+    if(f==='edad'||f==='peso'||f==='talla'||f==='cintura') $(f).dispatchEvent(new Event('input',{bubbles:true}));
+    syncSheet();
+  }
+  $('qSheet').addEventListener('input',e=>{ const el=e.target.closest('input[data-f]'); if(el) setF(el.dataset.f,el.value); });
+  $('qSheet').addEventListener('change',e=>{ const el=e.target.closest('select[data-f]'); if(el) setF(el.dataset.f,el.value); });
+  $('qSheet').addEventListener('click',e=>{
+    const sb=e.target.closest('[data-qsx]'); if(sb){ $(sb.dataset.qsx==='F'?'sx-f':'sx-m').click(); setTimeout(syncSheet,0); return; }
+    const b=e.target.closest('button[data-step]'); if(!b) return;
+    const inp=b.parentElement.querySelector('input'), st=parseFloat(b.dataset.step), dec=(String(b.dataset.step).split('.')[1]||'').length;
+    let x=parseFloat(inp.value); if(!isFinite(x)) x=0;
+    const nv=String(parseFloat(Math.max(0,x+st).toFixed(dec))); inp.value=nv; setF(b.dataset.f,nv);
+  });
+  function openEdit(q){
+    show('qSheet'); syncSheet();
+    const el=document.querySelector(`#qSheet [data-f="${q}"]:not(button)`);
+    if(el){ el.scrollIntoView({block:'center'}); el.closest('.qf').animate([{background:'var(--accent-soft)'},{background:'transparent'}],{duration:900}); }
+  }
+  window.addEventListener('req',()=>{ renderStrip(); syncSheet(); });
+  window.addEventListener('patchange',()=>{ renderStrip(); });
+  document.addEventListener('input',e=>{ if(e.target.closest&&e.target.closest('#pf')) renderStrip(); });
+  document.querySelectorAll('.tabs [role="tab"]').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>{ markPanels(); renderStrip(); },0)));
+
+  // ---------- Notas ----------
+  let tag='';
+  function notesRender(){
+    const an=annotations();
+    $('nList').innerHTML=an.length?an.slice(0,12).map(l=>{ const m=l.match(/^\[([^\]]+)\]\s*(.*)$/); return `<div class="nitem"><small>${esc(m?m[1]:'')}</small>${esc(m?m[2]:l)}</div>`; }).join(''):'<p class="note" style="margin:0">Aún no hay anotaciones.</p>';
+    if(document.activeElement!==$('nAll')) $('nAll').value=notesText();
+  }
+  function writeNotes(txt){ const t=$('pdNotes'); t.value=txt; t.dispatchEvent(new Event('change',{bubbles:true})); renderStrip(); }
+  function openNotes(){ if(!has()) return; show('nSheet'); notesRender(); }
+  $('nFab').addEventListener('click',openNotes);
+  $('nTags').addEventListener('click',e=>{ const b=e.target.closest('[data-tag]'); if(!b) return; tag=tag===b.dataset.tag?'':b.dataset.tag; document.querySelectorAll('#nTags [data-tag]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.tag===tag)); });
+  $('nAdd').addEventListener('click',()=>{
+    const t=$('nQuick').value.trim(); if(!t){ $('nQuick').focus(); return; }
+    const d=new Date(), p=n=>String(n).padStart(2,'0');
+    const stamp=`${p(d.getDate())}-${p(d.getMonth()+1)} ${p(d.getHours())}:${p(d.getMinutes())} · ${TABN[curTab()]||''}${tag?' · '+tag:''}`;
+    const prev=notesText();
+    writeNotes(`[${stamp}] ${t.replace(/\n+/g,' ')}`+(prev?'\n'+prev:''));
+    $('nQuick').value=''; tag=''; document.querySelectorAll('#nTags [data-tag]').forEach(x=>x.setAttribute('aria-pressed','false'));
+    notesRender();
+  });
+  let nT; $('nAll').addEventListener('input',()=>{ clearTimeout(nT); nT=setTimeout(()=>{ writeNotes($('nAll').value); notesRender(); },700); });
+
+  // ---------- Vista y gráficos ----------
+  $('vBtn').addEventListener('click',()=>show('vSheet'));
+  let cSvg=null;
+  document.addEventListener('click',e=>{
+    const svg=e.target.closest('svg.wchart,svg.frch'); if(!svg||e.target.closest('.sheet')) return;
+    cSvg=svg.cloneNode(true); cSvg.removeAttribute('style');
+    $('cSheetT').textContent=svg.getAttribute('aria-label')||'Gráfico';
+    $('cView').innerHTML=''; $('cView').appendChild(cSvg); $('cZ').value=100; zoom(); show('cSheet');
+  });
+  function zoom(){ const z=+$('cZ').value; $('cZTxt').textContent=z+' %'; if(cSvg) cSvg.style.width=z+'%'; }
+  $('cZ').addEventListener('input',zoom);
+
+
+  // Resultados tocables: abren el campo que los determina
+  document.addEventListener('click',e=>{
+    if(e.target.closest('.sheet,input,select,textarea,button,a')) return;
+    const tr=e.target.closest('#getBody tr[data-eq]');
+    if(tr){ const eq=tr.dataset.eq; if(window.EVAL) EVAL.setField('eqSel',eq); if(eq==='kcalkg'||eq==='manual') openEdit(eq==='kcalkg'?'kcalkg':'vctMan'); return; }
+    const mr=e.target.closest('#macroBody tr');
+    if(mr){ const t=mr.textContent; openEdit(/Prote/.test(t)?'prot':/Agua/.test(t)?'agua':/Carbo/.test(t)?'choMode':'lip'); return; }
+    const k=e.target.closest('#view-eval .kpis .kpi');
+    if(k){ const i=[...k.parentElement.children].indexOf(k); openEdit(['peso','imcObj','eqSel','prot'][i]||'peso'); }
+  });
+  // Secciones visibles de Evaluación
+  V.hide=V.hide||{};
+  function evalSections(){
+    const v=$('view-eval'); if(!v) return [];
+    const out=[];
+    v.querySelectorAll('#f fieldset').forEach((fs,i)=>{ const lg=fs.querySelector('legend'); const t=lg?lg.textContent.trim():''; if(t&&t!=='Identificación') out.push({k:'f'+i,t:'Datos · '+t,el:fs}); });
+    const bio=v.querySelector('#f details.bio'); if(bio) out.push({k:'bio',t:'Datos · Exámenes bioquímicos',el:bio});
+    v.querySelectorAll('main > section').forEach((sec,i)=>{ const h=sec.querySelector(':scope > h2'); const t=sec.classList.contains('kpis')?'Indicadores principales':(h?h.textContent.replace(/·.*$/,'').trim():''); if(t) out.push({k:'p'+i,t:'Resultados · '+t,el:sec}); });
+    return out;
+  }
+  function applyHide(){ evalSections().forEach(x=>x.el.classList.toggle('vhide',!!V.hide[x.k])); }
+  function renderSecs(){
+    $('vSecs').innerHTML=evalSections().map(x=>`<label><input type="checkbox" data-vk="${x.k}" ${V.hide[x.k]?'':'checked'}>${x.t.replace(/[&<>]/g,'')}</label>`).join('');
+  }
+  $('vSecs').addEventListener('change',e=>{ const k=e.target.dataset.vk; if(!k) return; if(e.target.checked) delete V.hide[k]; else V.hide[k]=1; saveView(); applyHide(); });
+  $('vBtn').addEventListener('click',renderSecs);
+  $('vReset').addEventListener('click',()=>{ V.hide={}; saveView(); applyHide(); renderSecs(); });
+  window.addEventListener('req',applyHide);
+  applyHide();
+
+
+  // Etiqueta cada celda con el título de su columna (para la vista apilada en móvil)
+  function labelStack(t){ const hs=[...t.querySelectorAll('thead th')].map(h=>h.textContent.trim()); t.querySelectorAll('tbody tr').forEach(tr=>[...tr.children].forEach((td,i)=>{ if(hs[i]&&!td.hasAttribute('colspan')) td.setAttribute('data-l',hs[i]); })); }
+  document.querySelectorAll('table.stack').forEach(t=>{ labelStack(t); const b=t.querySelector('tbody'); if(b&&window.MutationObserver) new MutationObserver(()=>labelStack(t)).observe(b,{childList:true}); });
+
+  window.addEventListener('resize',updateQH);
+  markPanels(); applyView();
+  setTimeout(()=>{ markPanels(); renderStrip(); },600);
 })();
 </script>
 
-</body>
-</html>
+<script>
+/* Respaldo de datos (app instalable). */
+(function(){
+  const $=id=>document.getElementById(id), B=window.LOCALBACKUP;
+  if(!B) return;
+  const fd=s=>{ const d=new Date(s); return isNaN(d)?'':d.toLocaleDateString('es-CL',{day:'2-digit',month:'short',year:'numeric'}); };
+  let tT; function toastMsg(t){ const el=$('toast'); if(!el) return; el.textContent=t; el.hidden=false; clearTimeout(tT); tT=setTimeout(()=>{ el.hidden=true; },3000); }
+  async function refresh(){
+    const last=B.lastBackup(); let n=0; try{ n=await B.count(); }catch(e){}
+    $('bkLast').textContent= last ? 'Último respaldo: '+fd(last) : 'Aún no has exportado un respaldo.';
+    const days= last ? (Date.now()-new Date(last))/864e5 : Infinity;
+    const w=$('bkWarn');
+    if(n>0 && days>7){ w.hidden=false; w.innerHTML=(last?'Han pasado más de 7 días desde tu último respaldo.':'Todavía no tienes respaldo de tus pacientes.')+' <button class="btn" type="button" id="bkNow" style="margin-left:8px">Respaldar ahora</button>'; }
+    else w.hidden=true;
+  }
+  async function doExport(){
+    try{ const n=await B.exportBackup(); toastMsg('Respaldo exportado ('+n+' registros).'); }
+    catch(e){ if(!e||e.code!=='declined') toastMsg('No se pudo exportar el respaldo.'); }
+    refresh();
+  }
+  $('bkExport').addEventListener('click',doExport);
+  document.addEventListener('click',e=>{ if(e.target && e.target.id==='bkNow') doExport(); });
+  $('bkImport').addEventListener('click',()=>$('bkFile').click());
+  $('bkFile').addEventListener('change',async e=>{
+    const f=e.target.files&&e.target.files[0]; e.target.value=''; if(!f) return;
+    const rep=$('bkReplace').checked;
+    if(rep && !confirm('Se borrarán todos los datos actuales de este teléfono y se reemplazarán por el respaldo. ¿Continuar?')) return;
+    try{ const n=await B.importBackup(f,rep); toastMsg('Respaldo importado ('+n+' registros).'); }
+    catch(err){ toastMsg(err.message||'No se pudo importar el respaldo.'); }
+    refresh();
+  });
+  let rT; window.addEventListener('localdata',()=>{ clearTimeout(rT); rT=setTimeout(refresh,500); });
+  window.addEventListener('load',()=>setTimeout(refresh,800));
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden) refresh(); });
+})();
+</script>
+</body></html>
